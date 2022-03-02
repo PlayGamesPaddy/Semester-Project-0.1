@@ -90,6 +90,20 @@ namespace Semester_Project_0._1.Services
             if (model != null && model.Id > 0)
            {
                 //update
+                var classInstent = _db.Classes.FirstOrDefault(x => x.Id == model.Id);
+                classInstent.Title = model.Title;
+                classInstent.Description = model.Description;
+                classInstent.StartDate = startDate;
+                classInstent.EndDate = endDate;
+                classInstent.Duration = model.Duration;
+                classInstent.InstructerId = model.InstructerId;
+                // StudentId temp will need to change to reference to student list
+                classInstent.StudentId = model.StudentId;
+                classInstent.IsApproved = model.IsApproved;
+                classInstent.AdminId = model.AdminId;
+                await _db.SaveChangesAsync();
+
+
                 return 1;
            }
            else
