@@ -1,0 +1,90 @@
+﻿<div class="modal fade" role="dialog" id="classInput" data-backdrop="static" data-keyboard="false" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="classForm" autocomplete="off" novalidate="novalidate">
+                <div class="model-header">
+                    @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin))
+                    {
+                        <h4 class="modal-title">Add/Edit Class Info</h4>
+                    }
+                    else
+                    {
+                        
+                            <h4 class="modal-title">Class Details</h4>
+                        
+                    }
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" maxlength="100" class="form-control" id="title" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Descriptions</label>
+                        <textarea type="text" class="form-control" id="description"></textarea>
+                    </div>
+                    @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin)|| User.IsInRole(Semester_Project_0._1.Utility.Helper.Instructure))
+                    {
+                        <div class="form-group">
+                            <label for="title">Select Student</label>
+                            <select id="studentId" asp-items="@(new SelectList(ViewBag.Studentlist,"StudentId","StudentNameFull"))" class="form-control">
+                                <option>Please select one</option>
+                            </select>
+                        </div>
+                    }
+                    else
+                    {
+                        @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Instructure))
+                        {
+                            <div class="form-group">
+                                <label for="lblStudentName">Student Name</label>
+                                <label class="form-control" disabled id="lblStudentName" />
+                            </div>
+                            <div class="form-group">
+                                <label for="lblStatus">Status</label>
+                                <label class="form-control" disabled id="lblStatus" />
+                            </div>
+                        }
+                        @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.User))
+                        {
+                            <div class="form-group">
+                                <label for="lblInstructureName">Instructure Name</label>
+                                <label class="form-control" disabled id="lblInstructureName" />
+                            </div>
+                            <div class="form-group">
+                                <label for="lblStatus">Status</label>
+                                <label class="form-control" disabled id="lblStatus" />
+                            </div>
+                        }
+                    }
+
+                    <div class="form-group">
+                        <lable for="classDate">Start Date Time</lable>
+                        <input id="classDate" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Duration</label>
+                        <select id="duration" asp-items="ViewBag.Duration" class="form-control"></select>
+                    </div>
+                    <input type="hidden" id="id" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="onCloseModal();">Close</button>&nbsp;
+                    @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin))
+                    {
+                        <button type="button" id="btnSubmit" class="btn btn-success" onclick="onSubmitForm();">Submit</button>
+                        <button type="button" id="btnDelete" class="btn btn-danger" onclick="onDeleteClass();">Delete</button>
+                    }
+                    @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Instructure))
+                    {
+                        <button type="button" id="btnConfirm" class="btn btn-success" onclick="onConfirm();">Confirm</button>
+                        <button type="button" id="btnSubmit" class="btn btn-success" onclick="onSubmitForm();">Submit</button>
+                        <button type="button" id="btnDelete" class="btn btn-danger" onclick="onDeleteClass();">Delete</button>
+                    }
+                    <!--<button type="button" class="btn btn-secondary" onclick="inCloseModal();">Close</button>&nbsp;-->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
