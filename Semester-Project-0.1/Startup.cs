@@ -46,6 +46,10 @@ namespace Semester_Project_0._1
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Home/AccessDenied");
+            });
             services.AddHttpContextAccessor();
         }
 
@@ -66,9 +70,9 @@ namespace Semester_Project_0._1
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            app.UseAuthorization();
+            //the ordering of the two lines below is in
             app.UseAuthentication();
+            app.UseAuthorization();
             app.UseSession();
             app.UseEndpoints(endpoints =>
             {

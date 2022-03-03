@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Semester_Project_0._1.Services;
 using Semester_Project_0._1.Utility;
 using System;
@@ -8,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace Semester_Project_0._1.Controllers
 {
+
+    [Authorize]
     public class ClassController : Controller
     {
         private readonly IClassService _classService;
@@ -16,6 +19,7 @@ namespace Semester_Project_0._1.Controllers
         {
             _classService = classService;
         }
+        //[Authorize(Roles = Helper.Admin)]
         public IActionResult Index()
         {
             ViewBag.InstuctureList = _classService.GetInstructureList();

@@ -13,9 +13,12 @@ namespace Semester_Project_0._1.Utility
     {
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            MailjetClient client = new MailjetClient("99f18d20f96811575978218e030ac0f6", "075a866ff68215031253c858dd5c7f71")
+            //Getting Environment Variable for the mail jet. set in project properties
+            string mailJet_apiKey = Environment.GetEnvironmentVariable("MailJet_apiKey");
+            string mailJet_apiSecret = Environment.GetEnvironmentVariable("MailJet_apiSecret");
+            MailjetClient client = new MailjetClient(mailJet_apiKey, mailJet_apiSecret)
             {
-
+                //MailjetClient client = new MailjetClient("99f18d20f96811575978218e030ac0f6", "075a866ff68215031253c858dd5c7f71")
             };
 
 

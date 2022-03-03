@@ -11,10 +11,10 @@ namespace Semester_Project_0._1.Utility
     /// </summary>
     public static class Helper
     {
-        public static String SystemAdmin = "SystemAdmin";
-        public static String Admin = "Admin";
-        public static String Instructure = "Instructure";
-        public static String User = "User";
+        public const String SystemAdmin = "SystemAdmin";
+        public const String Admin = "Admin";
+        public const String Instructure = "Instructure";
+        public const String User = "User";
 
         //public static string Admin = "Admin";
         //public static string Patient = "Patient";

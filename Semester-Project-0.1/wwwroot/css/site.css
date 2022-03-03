@@ -161,3 +161,20 @@ body {
 .radio-container input:checked ~ .checkmark:after {
     display: block;
 }
+
+
+
+
+
+#DivUserInfo:hover {
+    width: 100%;
+}
+
+    #DivUserInfo:hover ~ #DivUserMenu {
+        display: block;
+        
+    }
+
+#DivUserMenu {
+    display: none;
+}
