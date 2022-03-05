@@ -166,15 +166,15 @@ body {
 
 
 
-#DivUserInfo:hover {
+.DivUserInfo:hover {
     width: 100%;
 }
 
-    #DivUserInfo:hover ~ #DivUserMenu {
+    .DivUserInfo:hover ~ #DivUserMenu {
         display: block;
         
     }
 
-#DivUserMenu {
+.DivUserMenu {
     display: none;
 }

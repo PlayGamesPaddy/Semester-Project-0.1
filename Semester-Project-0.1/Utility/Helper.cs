@@ -55,7 +55,20 @@ namespace Semester_Project_0._1.Utility
                 };
             }
         }
+        public static List<SelectListItem> DaysOfTheWeek()
+        {
+            return new List<SelectListItem>
+            {
+                new SelectListItem{Value="Monday",Text="Monday"},
+                new SelectListItem{Value="Tuesday",Text="Tuesday"},
+                new SelectListItem{Value="Wednesday",Text="Wednesday"},
+                new SelectListItem{Value="Thursday",Text="Thursday"},
+                new SelectListItem{Value="Friday",Text="Friday"},
+                new SelectListItem{Value="Saturday",Text="Saturday"},
+                new SelectListItem{Value="Sunday",Text="Sunday"}
 
+            };
+        }
         public static List<SelectListItem> GetTimeDropDown()
         {
             int minute = 60;

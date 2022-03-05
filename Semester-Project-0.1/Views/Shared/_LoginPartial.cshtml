@@ -1,23 +1,33 @@
 ﻿@inject Microsoft.AspNetCore.Identity.SignInManager<Semester_Project_0._1.Models.ApplicationUser> signInManager
 @if (signInManager.IsSignedIn(User))
 {
-    <div id="DivUserInfo">
-        <form method="post" id="logoutForm" asp-controller="Account" asp-action="Logoff">
-            <ul class="nav navbar-nav">
-                <li class="nav-link"> Hello @User.Identity.Name!</li>
-                <li><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-            </ul>
-        </form>
+<form method="post" id="logoutForm" asp-controller="Account" asp-action="Logoff">
+    <div class="btn-group">
+        <div class="dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Hello @User.Identity.Name!
+        </div>
+            <span class="sr-only">Toggle Dropdown</span>
+            <div class="dropdown-menu align-bottom-align-r wi">
+                <a class="dropdown-item" asp-area="" asp-controller="Student" asp-action="Index">Sudents</a>
+                <div class="dropdown-divider"></div>
+                @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin) || User.IsInRole(Semester_Project_0._1.Utility.Helper.SystemAdmin) || User.IsInRole(Semester_Project_0._1.Utility.Helper.Instructure))
+                {
+
+                    <a class="dropdown-item" href="#">creathe a recering class</a>
+                }
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Separated link</a>
+                <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+            </div>
     </div>
-    <div id="DivUserMenu">
-        hghghghg
-        hghghg
-        jhghjghg
-        jgjgjg
-        jgjgjg
-        jgjgjg
-        jgjgjg
+    <div >
+        
     </div>
+</form>
+
+
 }
 else
 {

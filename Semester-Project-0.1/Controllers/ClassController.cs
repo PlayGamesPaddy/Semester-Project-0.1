@@ -36,5 +36,14 @@ namespace Semester_Project_0._1.Controllers
             //String todaysDate = DateTime.Now.ToShortDateString();
             return Ok("YOu have entered id = " + id);
         }
+
+        public IActionResult RecurringClassSetup()
+        {
+
+            ViewBag.InstuctureList = _classService.GetInstructureList();
+            ViewBag.Duration = Helper.GetTimeDropDown();
+            ViewBag.Days = Helper.DaysOfTheWeek();
+            return View();
+        }
     }
 }

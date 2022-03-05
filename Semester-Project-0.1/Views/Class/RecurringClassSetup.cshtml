@@ -1,0 +1,171 @@
+﻿<h4>Recurring - Class</h4>
+
+<div class="container p-3">
+    <form id="classForm" autocomplete="off" novalidate="novalidate" runat="server">
+        <div class="model-header">
+
+            <h4 class="modal-title">Add Details</h4>
+
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" maxlength="100" class="form-control" id="title" />
+            </div>
+            <div div class="form-group">
+                <label for="numberOfStudents">Number Of Students</label>
+                <input type="number" id="numberOfStudents" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="description">Descriptions</label>
+                <textarea type="text" class="form-control" id="description"></textarea>
+            </div>
+
+            <div class="form-group">
+                <lable for="DateOfFirstClass">Date of First Class</lable>
+                <input id="datepicker" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <lable for="DateOfLastClass">Date of Last Class</lable>
+                <input id="lastdatepicker" class="form-control">
+            </div>
+            <div class="btn-danger h-100 d-flex ">
+                <div class="table w-100 h-100">
+                    <div class="btn-danger col-md-3 col-xs-6 divTableCell float-left w-50">
+                        <label class="radio-inline">
+                            <input type="radio" name="recurrence" id="Radios1" value="weekly" checked="checked">
+                            Weekly
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="recurrence" id="Radios2" value="multibleDaysAWeek">
+                            Multible Days A Week
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="recurrence" id="Radios3" value="everySecondWeek">
+                            Every Second Week
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="recurrence" id="Radios4" value="onceAMounth">
+                            Once A Mounth
+                        </label>
+                    </div>
+                    <div class="btn-danger float-left col-md-6 col-xs-6 divTableCell w-99 " id="weeklyPanel">
+                        <div class="form-group">
+                            <label for="daysoftheWeekCB">Multible Days A Week</label>
+                            <!--new SelectListItem{Value="Monday",Text="Monday"},
+    new SelectListItem{Value="Tuesday",Text="Tuesday"},
+    new SelectListItem{Value="Wednesday",Text="Wednesday"},
+    new SelectListItem{Value="Thursday",Text="Thursday"},
+    new SelectListItem{Value="Friday",Text="Friday"},
+    new SelectListItem{Value="Saturday",Text="Saturday"},
+    new SelectListItem{Value="Sunday",Text="Sunday"}
+                        <input type="number" id="numberOfStudents" class="form-control" />-->
+
+                        </div>
+                        <div>
+                            <div class="table-row">
+                                <div class="float-left table-cell">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="recurrence" id="cbMonday" value="Monday">
+                                        Monday
+                                    </label>
+                                </div>
+                                <div class="float-right table-cell">
+                                    <input id="montimepicker" class="form-control">
+                                </div>
+                            </div>
+                            <div class="table-row">
+                                <div class="float-left table-cell">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="recurrence" id="cbTuesday" value="Tuesday">
+                                        Tuesday
+                                    </label>
+                                </div>
+
+                                <div class="float-right table-cell">
+                                    <input id="tuetimepicker" class="form-control">
+                                </div>
+                            </div>
+                            <div class="table-row">
+                                <div class="float-left table-cell">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="recurrence" id="cbWednesday" value="Wednesday">
+                                        Wednesday
+                                    </label>
+                                </div>
+                                <div class="float-right table-cell">
+                                    <input id="wentimepicker" class="form-control">
+                                </div>
+                            </div>
+                            <div class="table-row">
+                                <div class="float-left table-cell">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="recurrence" id="cbThursday" value="Thursday">
+                                        Thursday
+                                    </label>
+                                </div>
+                                <div class="float-right table-cell">
+                                    <input id="thutimepicker" class="form-control">
+                                </div>
+                            </div>
+                            <div class="table-row">
+                                <div class="float-left table-cell">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="recurrence" id="cbFriday" value="Friday">
+                                        Friday
+                                    </label>
+                                </div>
+                                <div class="float-right table-cell">
+                                    <input id="fritimepicker" class="form-control">
+                                </div>
+                            </div>
+                            <div class="table-row">
+                                <div class="float-left table-cell">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="recurrence" id="cbSaturday" value="Saturday">
+                                        Saturday
+                                    </label>
+                                </div>
+                                <div class="float-right table-cell">
+                                    <input id="sattimepicker" class="form-control">
+                                </div>
+                            </div>
+                            <div class="table-row">
+                                <div class="float-left table-cell">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="recurrence" id="cbSunday" value="Sunday">
+                                        Sunday
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="float-right table-cell">
+                                <input id="suntimepicker" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div id="weeklyDiv">
+        <div class="float-left col-md-6 col-xs-6 divTableCell form-group btn-success h-100">
+
+            <label for="daysoftheweeklb">Weekly</label>
+            <select id="daysoftheweekradio" asp-items="ViewBag.Days" class="form-control"></select>
+        </div>
+    </div>-->
+                    </div>
+                </div>
+            <br />
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="title">Duration</label>
+            <select id="duration" asp-items="ViewBag.Duration" class="form-control"></select>
+        </div>
+        <input type="hidden" id="id" />
+        <div class="modal-footer">
+            <button type="button" id="btnSubmit" class="btn btn-success" onclick="onSubmitForm();">Submit</button>
+
+            <!--<button type="button" class="btn btn-secondary" onclick="inCloseModal();">Close</button>&nbsp;-->
+        </div>
+    </form>
+        </div>

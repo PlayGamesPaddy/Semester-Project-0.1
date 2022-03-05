@@ -5,7 +5,33 @@ $(document).ready(function () {
         value: new Date(),
         dateInput: false
     });
-
+    $("#datepicker").kendoDatePicker({
+        dateInput: true
+    });
+    $("#lastdatepicker").kendoDatePicker({
+        dateInput: true
+    });
+    $("#montimepicker").kendoTimePicker({
+        dateInput: true
+    });
+    $("#tuetimepicker").kendoTimePicker({
+        dateInput: true
+    });
+    $("#wentimepicker").kendoTimePicker({
+        dateInput: true
+    });
+    $("#thutimepicker").kendoTimePicker({
+        dateInput: true
+    });
+    $("#fritimepicker").kendoTimePicker({
+        dateInput: true
+    });
+    $("#sattimepicker").kendoTimePicker({
+        dateInput: true
+    });
+    $("#suntimepicker").kendoTimePicker({
+        dateInput: true
+    });
     InitializeCalendar();
 });
 
