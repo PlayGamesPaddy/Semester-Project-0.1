@@ -1,4 +1,7 @@
-﻿<h4>Recurring - Class</h4>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+<h4>Recurring - Class</h4>
 
 <div class="container p-3">
     <form id="classForm" autocomplete="off" novalidate="novalidate" runat="server">
@@ -31,141 +34,186 @@
                 <lable for="DateOfLastClass">Date of Last Class</lable>
                 <input id="lastdatepicker" class="form-control">
             </div>
-            <div class="btn-danger h-100 d-flex ">
-                <div class="table w-100 h-100">
-                    <div class="btn-danger col-md-3 col-xs-6 divTableCell float-left w-50">
-                        <label class="radio-inline">
-                            <input type="radio" name="recurrence" id="Radios1" value="weekly" checked="checked">
-                            Weekly
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="recurrence" id="Radios2" value="multibleDaysAWeek">
-                            Multible Days A Week
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="recurrence" id="Radios3" value="everySecondWeek">
-                            Every Second Week
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="recurrence" id="Radios4" value="onceAMounth">
-                            Once A Mounth
-                        </label>
+            <div class="btn-danger d-flex ">
+
+            </div>
+            <div class="form-group">
+                <label for="title">Duration</label>
+                <select id="duration" asp-items="ViewBag.Duration" class="form-control"></select>
+            </div>
+
+            <!--<button type="button" class="btn btn-secondary" onclick="inCloseModal();">Close</button>&nbsp;-->
+            <div class="row">
+                <div class="col-3">
+                    <div class="radio-inline rounded-left">
+                        <input type="radio" name="recurrence" id="Radios1" value="weekly" onclick="schedulingType()">
+                        <label>Weekly</label>
                     </div>
-                    <div class="btn-danger float-left col-md-6 col-xs-6 divTableCell w-99 " id="weeklyPanel">
+                    <div class="radio-inline rounded-left">
+                        <input type="radio" name="recurrence" id="Radios2" value="multibleDaysAWeek" checked onclick="schedulingType()">
+                        <label>Multible Days A Week</label>
+                    </div>
+                    <div class="radio-inline rounded-left">
+                        <input type="radio" name="recurrence" id="Radios3" value="everySecondWeek" onclick="schedulingType()">
+                        <label>Every Second Week</label>
+                    </div>
+                    <div class="radio-inline rounded-left">
+                        <input type="radio" name="recurrence" id="Radios4" value="onceAMounth" onclick="schedulingType()">
+                        <label>Once A Mounth</label>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="col-10 col-md-9 form-group btn-success rounded-right rounded-bottom" colspan="2" id="secondcolum">
+
+                    <div id="weeklyDiv">
+                        <h5><label for="daysoftheweeklb">Weekly</label></h5>
+                        <label>Day</label>
+                        <select id="daysoftheweekradio" asp-items="ViewBag.Days" class="form-control"></select>
+                        <label>Time</label>
+                        <input id="weeklytimepicer" class="form-control">
+                    </div>
+
+
+
+
+                    <div id="multidayweekPanel">
                         <div class="form-group">
-                            <label for="daysoftheWeekCB">Multible Days A Week</label>
-                            <!--new SelectListItem{Value="Monday",Text="Monday"},
-    new SelectListItem{Value="Tuesday",Text="Tuesday"},
-    new SelectListItem{Value="Wednesday",Text="Wednesday"},
-    new SelectListItem{Value="Thursday",Text="Thursday"},
-    new SelectListItem{Value="Friday",Text="Friday"},
-    new SelectListItem{Value="Saturday",Text="Saturday"},
-    new SelectListItem{Value="Sunday",Text="Sunday"}
-                        <input type="number" id="numberOfStudents" class="form-control" />-->
+                            <h5><label for="daysoftheWeekCB">Multible Days A Week</label></h5>
 
                         </div>
-                        <div>
-                            <div class="table-row">
-                                <div class="float-left table-cell">
+
+                        <div class="btn-danger col-12 col-md-12">
+
+                            <div class="row">
+                                <div class="col-3 col-sm-6">
                                     <label class="checkbox">
-                                        <input type="checkbox" name="recurrence" id="cbMonday" value="Monday">
+                                        <input type="checkbox" name="recurrence" id="cbMonday" value="Monday" onclick="MultibleDayCB()">
                                         Monday
                                     </label>
                                 </div>
-                                <div class="float-right table-cell">
+                                <div class="col-3 col-sm-6" id="mondiv">
                                     <input id="montimepicker" class="form-control">
                                 </div>
                             </div>
-                            <div class="table-row">
-                                <div class="float-left table-cell">
+                            <div class="row">
+                                <div class="col-3 col-sm-6">
                                     <label class="checkbox">
-                                        <input type="checkbox" name="recurrence" id="cbTuesday" value="Tuesday">
+                                        <input type="checkbox" name="recurrence" id="cbTuesday" value="Tuesday" onclick="MultibleDayCB()">
                                         Tuesday
                                     </label>
                                 </div>
 
-                                <div class="float-right table-cell">
+                                <div class=" col-3 col-sm-6" id="tuediv">
                                     <input id="tuetimepicker" class="form-control">
                                 </div>
                             </div>
-                            <div class="table-row">
-                                <div class="float-left table-cell">
+                            <div class="row">
+                                <div class="col-3 col-sm-6">
                                     <label class="checkbox">
-                                        <input type="checkbox" name="recurrence" id="cbWednesday" value="Wednesday">
+                                        <input type="checkbox" name="recurrence" id="cbWednesday" value="Wednesday" onclick="MultibleDayCB()">
                                         Wednesday
                                     </label>
                                 </div>
-                                <div class="float-right table-cell">
+                                <div class=" col-3 col-sm-6 " id="wendiv">
                                     <input id="wentimepicker" class="form-control">
                                 </div>
                             </div>
-                            <div class="table-row">
-                                <div class="float-left table-cell">
+                            <div class="row">
+                                <div class=" col-3 col-sm-6">
                                     <label class="checkbox">
-                                        <input type="checkbox" name="recurrence" id="cbThursday" value="Thursday">
+                                        <input type="checkbox" name="recurrence" id="cbThursday" value="Thursday" onclick="MultibleDayCB()">
                                         Thursday
                                     </label>
                                 </div>
-                                <div class="float-right table-cell">
+                                <div class=" col-3 col-sm-6" id="thudiv">
                                     <input id="thutimepicker" class="form-control">
                                 </div>
                             </div>
-                            <div class="table-row">
-                                <div class="float-left table-cell">
+                            <div class="row">
+                                <div class="col-3 col-sm-6">
                                     <label class="checkbox">
-                                        <input type="checkbox" name="recurrence" id="cbFriday" value="Friday">
+                                        <input type="checkbox" name="recurrence" id="cbFriday" value="Friday" onclick="MultibleDayCB()">
                                         Friday
                                     </label>
                                 </div>
-                                <div class="float-right table-cell">
+                                <div class="col-3 col-sm-6 " id="fridiv">
                                     <input id="fritimepicker" class="form-control">
                                 </div>
                             </div>
-                            <div class="table-row">
-                                <div class="float-left table-cell">
+                            <div class="row">
+                                <div class="col-3 col-sm-6">
                                     <label class="checkbox">
-                                        <input type="checkbox" name="recurrence" id="cbSaturday" value="Saturday">
+                                        <input type="checkbox" name="recurrence" id="cbSaturday" value="Saturday" onclick="MultibleDayCB()">
                                         Saturday
                                     </label>
                                 </div>
-                                <div class="float-right table-cell">
+                                <div class="col-3 col-sm-6 " id="satdiv">
                                     <input id="sattimepicker" class="form-control">
                                 </div>
                             </div>
-                            <div class="table-row">
-                                <div class="float-left table-cell">
+                            <div class="row">
+                                <div class=" col-3 col-sm-6">
                                     <label class="checkbox">
-                                        <input type="checkbox" name="recurrence" id="cbSunday" value="Sunday">
+                                        <input type="checkbox" name="recurrence" id="cbSunday" value="Sunday" onclick="MultibleDayCB()">
                                         Sunday
                                     </label>
                                 </div>
+
+                                <div class=" col-3 col-sm-6 " id="sundiv">
+                                    <input id="suntimepicker" class="form-control">
+                                </div>
                             </div>
-                            <div class="float-right table-cell">
-                                <input id="suntimepicker" class="form-control">
-                            </div>
+
                         </div>
                     </div>
-                    <!--<div id="weeklyDiv">
-        <div class="float-left col-md-6 col-xs-6 divTableCell form-group btn-success h-100">
 
-            <label for="daysoftheweeklb">Weekly</label>
-            <select id="daysoftheweekradio" asp-items="ViewBag.Days" class="form-control"></select>
-        </div>
-    </div>-->
+                    <div id="secondweekDiv">
+
+                        <h5><label for="secondweekdaysoftheweeklb">Every Second Weekly</label></h5>
+                        <label>Day</label>
+                        <select id="secondweekdaysoftheweekradio" asp-items="ViewBag.Days" class="form-control"></select>
+                        <label>Time</label>
+                        <input id="secondweeklytimepicer" class="form-control">
                     </div>
-                </div>
-            <br />
-        </div>
-        <br />
-        <div class="form-group">
-            <label for="title">Duration</label>
-            <select id="duration" asp-items="ViewBag.Duration" class="form-control"></select>
-        </div>
-        <input type="hidden" id="id" />
-        <div class="modal-footer">
-            <button type="button" id="btnSubmit" class="btn btn-success" onclick="onSubmitForm();">Submit</button>
 
-            <!--<button type="button" class="btn btn-secondary" onclick="inCloseModal();">Close</button>&nbsp;-->
+
+
+                    <div class="" id="onceaMonthpanel">
+
+                        <h5><label for="onceamounthlb">Once A Month</label></h5>
+                        <label>Week Of The Month</label>
+                        <select id="onceaMonthradio" asp-items="ViewBag.WeekOfTheMonth" class="form-control"></select>
+                        <label>Time</label>
+                        <input id="mounthtimepicer" class="form-control">
+                    </div>
+
+
+                </div>
+            </div>
+            <div id="divInstructureList">
+                @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin) || User.IsInRole(Semester_Project_0._1.Utility.Helper.SystemAdmin))
+                {
+                    <input type="hidden" id="instructureselect" value="1" />
+                    <label> Main Instructure</label>
+                    @Html.DropDownList("instructureId", new SelectList(ViewBag.InstuctureList, "Id", "FullName", "FirstName"), new
+                    { @class = "form-control select2", @onchange = "OnInstructerIdChange()" })
+                }
+                else
+                {
+                    <input type="hidden" id="instructureselect" value="2" />
+                }
+            </div>
+            <!-------------------------------------------------------------------------------------------------------->
+
+            <input type="hidden" id="id" />
+            <div class="modal-footer">
+                <button type="button" id="btnSubmit" class="btn btn-success" onclick="onSubmitForm();">Submit</button>
+            </div>
         </div>
     </form>
-        </div>
+</div>

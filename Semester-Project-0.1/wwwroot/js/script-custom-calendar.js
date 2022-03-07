@@ -6,33 +6,44 @@ $(document).ready(function () {
         dateInput: false
     });
     $("#datepicker").kendoDatePicker({
-        dateInput: true
+        dateInput: false
     });
     $("#lastdatepicker").kendoDatePicker({
-        dateInput: true
+        dateInput: false
     });
     $("#montimepicker").kendoTimePicker({
-        dateInput: true
+        dateInput: false
     });
     $("#tuetimepicker").kendoTimePicker({
-        dateInput: true
+        dateInput: false
     });
     $("#wentimepicker").kendoTimePicker({
-        dateInput: true
+        dateInput: false
     });
     $("#thutimepicker").kendoTimePicker({
-        dateInput: true
+        dateInput: false
     });
     $("#fritimepicker").kendoTimePicker({
-        dateInput: true
+        dateInput: false
     });
     $("#sattimepicker").kendoTimePicker({
-        dateInput: true
+        dateInput: false
     });
     $("#suntimepicker").kendoTimePicker({
-        dateInput: true
+        dateInput: false
+    });
+    $("#weeklytimepicer").kendoTimePicker({
+        dateInput: false
+    });
+    $("#secondweeklytimepicer").kendoTimePicker({
+        dateInput: false
+    });
+    $("#mounthtimepicer").kendoTimePicker({
+        dateInput: false
     });
     InitializeCalendar();
+    schedulingType();
+    MultibleDayCB();
 });
 
 var calendar;
@@ -188,6 +199,9 @@ function onSubmitForm() {
         });
     }
 }
+function rClassSubmit() {
+
+}
 
 function checkValidation() {
     var isValid = true;
@@ -288,4 +302,72 @@ function onConfirm() {
             $.notify("Error", "error");
         }
     });
+}
+
+function schedulingType() {
+    $("#weeklyDiv").hide();
+    $("#multidayweekPanel").hide();
+    $("#secondweekDiv").hide();
+    $("#onceaMonthpanel").hide();
+    if (document.getElementById('Radios1').checked) {
+        $("#weeklyDiv").removeClass('hide');
+        $("#weeklyDiv").show();
+    }
+    else if (document.getElementById('Radios2').checked) {
+        $("#multidayweekPanel").removeClass('hide');
+        $("#multidayweekPanel").show();
+    }
+    else if (document.getElementById('Radios3').checked) {
+        $("#secondweekDiv").removeClass('hide');
+        $("#secondweekDiv").show();
+    }
+    else if (document.getElementById('Radios4').checked) {
+        $("#onceaMonthpanel").removeClass('hide');
+        $("#onceaMonthpanel").show();
+    }
+}
+
+function MultibleDayCB() {
+    $("#tuediv").hide();
+    $("#mondiv").hide();
+    $("#wendiv").hide();
+    $("#thudiv").hide();
+    $("#fridiv").hide();
+    $("#satdiv").hide();
+    $("#sundiv").hide();
+    if (document.getElementById('cbMonday').checked) {
+
+        $("#mondiv").removeClass('hide');
+        $("#mondiv").show();
+    }
+    if (document.getElementById('cbTuesday').checked) {
+
+        $("#tuediv").removeClass('hide');
+        $("#tuediv").show();
+    }
+    if (document.getElementById('cbWednesday').checked) {
+
+        $("#wendiv").removeClass('hide');
+        $("#wendiv").show();
+    }
+    if (document.getElementById('cbThursday').checked) {
+
+        $("#thudiv").removeClass('hide');
+        $("#thudiv").show();
+    }
+    if (document.getElementById('cbFriday').checked) {
+
+        $("#fridiv").removeClass('hide');
+        $("#fridiv").show();
+    }
+    if (document.getElementById('cbSaturday').checked) {
+
+        $("#satdiv").removeClass('hide');
+        $("#satdiv").show();
+    }
+    if (document.getElementById('cbSunday').checked) {
+
+        $("#sundiv").removeClass('hide');
+        $("#sundiv").show();
+    }
 }

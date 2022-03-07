@@ -43,6 +43,7 @@ namespace Semester_Project_0._1.Controllers
             ViewBag.InstuctureList = _classService.GetInstructureList();
             ViewBag.Duration = Helper.GetTimeDropDown();
             ViewBag.Days = Helper.DaysOfTheWeek();
+            ViewBag.WeekOfTheMonth = Helper.WeekOfTheMonth();
             return View();
         }
     }

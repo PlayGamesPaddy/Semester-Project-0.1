@@ -69,6 +69,18 @@ namespace Semester_Project_0._1.Utility
 
             };
         }
+        public static List<SelectListItem> WeekOfTheMonth()
+        {
+            return new List<SelectListItem>
+            {
+                new SelectListItem{Value="1",Text="1st"},
+                new SelectListItem{Value="2",Text="2nd"},
+                new SelectListItem{Value="3",Text="3rd"},
+                new SelectListItem{Value="4",Text="4rh"},
+                new SelectListItem{Value="5",Text="last"},
+
+            };
+        }
         public static List<SelectListItem> GetTimeDropDown()
         {
             int minute = 60;
