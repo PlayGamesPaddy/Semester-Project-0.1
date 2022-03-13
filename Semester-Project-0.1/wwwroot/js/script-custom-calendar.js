@@ -200,7 +200,125 @@ function onSubmitForm() {
     }
 }
 function rClassSubmit() {
+    var radioselected;
+    var monday = false;
+    var tuesday = false;
+    var wednesday = false;
+    var thursday = false;
+    var friday = false;
+    var saterday = false;
+    var sunday = false;
 
+    if (document.getElementById('Radios1').checked) {
+        radioselected = $("#Radios1").val();
+    }
+    else if (document.getElementById('Radios2').checked) {
+        radioselected = $("#Radios2").val();
+
+
+        if (document.getElementById('cbMonday').checked) { monday = true;}
+        if (document.getElementById('cbTuesday').checked) { tuesday = true;}
+        if (document.getElementById('cbWednesday').checked) { wednesday = true;}
+        if (document.getElementById('cbThursday').checked) { thursday = true;}
+        if (document.getElementById('cbFriday').checked) { friday = true;}
+        if (document.getElementById('cbSaturday').checked) { saterday = true;}
+        if (document.getElementById('cbSunday').checked) { sunday = true;}
+
+
+
+    }
+    else if (document.getElementById('Radios3').checked) {
+        radioselected = $("#Radios3").val();
+    }
+    else {
+        radioselected = $("#Radios4").val();
+    }
+
+
+
+    var requestData = {
+        Id: parseInt($('#id').val()),
+        Title: $("#title").val(),
+        FirstClassDate: $("#datepicker").val(),
+        LastClassDate: $("#lastdatepicker").val(),
+        Description: $("#description").val(),
+        Duration: $("#duration").val(),
+        InstructerId: $("#instructureId").val(),
+        RecurringType: radioselected,
+
+        weeklyday: $("#weeklyday").val(),
+        weeklytimepicer: $("#weeklytimepicer").val(),
+
+        cbMonday: monday,
+        montimepicker: $("#montimepicker").val(),
+        cbTuesday: tuesday,
+        tuetimepicker: $("#tuetimepicker").val(),
+        cbWednesday: wednesday,
+        wentimepicker: $("#wentimepicker").val(),
+        cbThursday: thursday,
+        thutimepicker: $("#thutimepicker").val(),
+        cbFriday: friday,
+        fritimepicker: $("#fritimepicker").val(),
+        cbSaturday: saterday,
+        sattimepicker: $("#sattimepicker").val(),
+        cbSunday: sunday,
+        suntimepicker: $("#suntimepicker").val(),
+
+        secondweekdaysoftheweekradio: $("#secondweekdaysoftheweekradio").val(),
+        secondweeklytimepicer: $("#secondweeklytimepicer").val(),
+
+        onceaMonthradio: $("#onceaMonthradio").val(),
+        mounthtimepicer: $("#mounthtimepicer").val(),
+    };
+    /*const requestDataDays = [
+        $("#weeklyday").val(),
+
+        $("#cbMonday").val(),
+        $("#cbTuesday").val(),
+        $("#cbWednesday").val(),
+        $("#cbThursday").val(),
+        $("#cbFriday").val(),
+        $("#cbSaturday").val(),
+        $("#cbSunday").val(),
+
+        $("#secondweekdaysoftheweekradio").val(),
+
+        $("#onceaMonthradio").val(),
+
+    ];
+    const requestDataTimes = [
+        $("#weeklytimepicer").val(),
+
+        $("#montimepicker").val(),
+        $("#tuetimepicker").val(),
+        $("#wentimepicker").val(),
+        $("#thutimepicker").val(),
+        $("#fritimepicker").val(),
+        $("#sattimepicker").val(),
+        $("#suntimepicker").val(),
+
+        $("#secondweeklytimepicer").val(),
+
+        $("#mounthtimepicer").val(),
+    ];*/
+
+    $.ajax({
+        url: routeURL + '/api/RecurringClassSetup/SaveCalendarData',
+        type: 'POST',
+        data: JSON.stringify(requestData),
+        contentType: 'application/json',
+        success: function (response) {
+            if (response.status === 1 || response.status === 2) {
+                $.notify(response.message, "success");
+            }
+            else {
+                $.notify("1" + response.message, "error");
+            }
+        },
+        error: function (xhr) {
+            $.notify("Error", "error");
+        }
+    });
 }
 
 function checkValidation() {

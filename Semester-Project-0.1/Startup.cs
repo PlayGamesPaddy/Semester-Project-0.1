@@ -37,6 +37,8 @@ namespace Semester_Project_0._1
 
             services.AddTransient<IClassService, ClassService>();
 
+            services.AddTransient<InterfaceRecurringClassService, RecurringClassService>();
+
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDBContext>();
             services.AddDistributedMemoryCache();
             services.AddScoped<IEmailSender, EmailSender>();

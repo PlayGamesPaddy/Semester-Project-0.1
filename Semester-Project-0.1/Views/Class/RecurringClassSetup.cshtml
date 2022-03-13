@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
+@inject Microsoft.AspNetCore.Identity.SignInManager<Semester_Project_0._1.Models.ApplicationUser> signInManager
 
 <h4>Recurring - Class</h4>
 
@@ -73,7 +74,7 @@
                     <div id="weeklyDiv">
                         <h5><label for="daysoftheweeklb">Weekly</label></h5>
                         <label>Day</label>
-                        <select id="daysoftheweekradio" asp-items="ViewBag.Days" class="form-control"></select>
+                        <select id="weeklyday" asp-items="ViewBag.Days" class="form-control"></select>
                         <label>Time</label>
                         <input id="weeklytimepicer" class="form-control">
                     </div>
@@ -186,8 +187,8 @@
                     <div class="" id="onceaMonthpanel">
 
                         <h5><label for="onceamounthlb">Once A Month</label></h5>
-                        <label>Week Of The Month</label>
-                        <select id="onceaMonthradio" asp-items="ViewBag.WeekOfTheMonth" class="form-control"></select>
+                        <label>Day of the Week</label>
+                        <select id="onceaMonthradio" asp-items="ViewBag.Days" class="form-control"></select>
                         <label>Time</label>
                         <input id="mounthtimepicer" class="form-control">
                     </div>
@@ -205,6 +206,7 @@
                 }
                 else
                 {
+                    <input type="hidden" id="instructureId" value="" />
                     <input type="hidden" id="instructureselect" value="2" />
                 }
             </div>
@@ -212,7 +214,7 @@
 
             <input type="hidden" id="id" />
             <div class="modal-footer">
-                <button type="button" id="btnSubmit" class="btn btn-success" onclick="onSubmitForm();">Submit</button>
+                <button type="button" id="btnSubmit" class="btn btn-success" onclick="rClassSubmit();">Submit</button>
             </div>
         </div>
     </form>

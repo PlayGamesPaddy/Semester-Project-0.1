@@ -15,6 +15,11 @@ namespace Semester_Project_0._1.Services
     {
         private readonly ApplicationDBContext _db;
         private readonly IEmailSender _emailSender;
+        public RecurringClassService(ApplicationDBContext db, IEmailSender emailSender)
+        {
+            _db = db;
+            _emailSender = emailSender;
+        }
 
         public async Task<int> AddUpdate(RecurringClassInstentVM model)
         {
@@ -38,11 +43,17 @@ namespace Semester_Project_0._1.Services
                 Duration = model.Duration,
                 InstructerId = model.InstructerId,
                 Instructer = model.Instructer,
-                Students = model.Students,
-                Classlist = model.Classlist,
-                RecurringType = model.RecurringType
+                RecurringType = model.RecurringType,
+                Classlist = model.Classlist
             };
-
+            //weekly
+            //multibleDaysAWeek
+            //everySecondWeek
+            //onceAMounth
+            List<ClassInstent>  classlist;
+            //firstDate = firstDate.Add(model.weeklytimepicer);
+            
+            _db.RecurringClasses.Add(recurringClass);
             await _db.SaveChangesAsync();
 
             return 2;
