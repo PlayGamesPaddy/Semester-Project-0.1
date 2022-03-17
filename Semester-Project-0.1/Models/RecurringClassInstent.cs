@@ -16,7 +16,8 @@ namespace Semester_Project_0._1.Models
         public string InstructerId { get; set; }
         public ApplicationUser Instructer { set; get; }
         // StudentId temp will need to change to reference to student list
-        public List<Student> Students { get; set; }
+        public int MaxNumberOfStudents { get; set; }
+        public List<classStudentList> StudentList { get; set; }
         public List<ClassInstent> Classlist { set; get; }
         public string RecurringType { get; set; }
         //public bool IsApproved { set; get; }

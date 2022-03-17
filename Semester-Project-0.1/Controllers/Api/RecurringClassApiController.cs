@@ -43,6 +43,7 @@ namespace Semester_Project_0._1.Controllers.Api
             recurringClassInstentVM.LastClassDate = data.LastClassDate;
             recurringClassInstentVM.Description = data.Description;
             recurringClassInstentVM.Duration = data.Duration;
+            recurringClassInstentVM.MaxNumberOfStudents = data.MaxNumberOfStudents;
             if (data.InstructerId == null || data.InstructerId == "")
             {
                 recurringClassInstentVM.InstructerId = loginUserId;

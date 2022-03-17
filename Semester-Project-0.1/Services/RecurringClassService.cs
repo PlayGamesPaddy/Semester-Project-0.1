@@ -44,7 +44,8 @@ namespace Semester_Project_0._1.Services
                 InstructerId = model.InstructerId,
                 Instructer = model.Instructer,
                 RecurringType = model.RecurringType,
-                Classlist = model.Classlist
+                Classlist = model.Classlist,
+                MaxNumberOfStudents=model.MaxNumberOfStudents
             };
             //weekly
             //multibleDaysAWeek

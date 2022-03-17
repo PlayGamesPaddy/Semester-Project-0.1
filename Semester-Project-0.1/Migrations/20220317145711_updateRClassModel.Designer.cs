@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Semester_Project_0._1.Data;
 
 namespace Semester_Project_0._1.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220317145711_updateRClassModel")]
+    partial class updateRClassModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -314,7 +316,7 @@ namespace Semester_Project_0._1.Migrations
                     b.Property<DateTime>("LastClassDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MaxNumberOfStudents")
+                    b.Property<int>("NumberOfStudents")
                         .HasColumnType("int");
 
                     b.Property<string>("RecurringType")

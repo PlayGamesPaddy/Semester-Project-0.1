@@ -9,6 +9,7 @@ namespace Semester_Project_0._1.Utility
     public class RecurringClassContainer
     {
         public string Title { get; set; }
+        public int MaxNumberOfStudents { get; set; }
         public string FirstClassDate { get; set; }
         public string LastClassDate { get; set; }
         public string Description { get; set; }

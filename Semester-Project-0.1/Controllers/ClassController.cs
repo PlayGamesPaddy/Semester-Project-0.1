@@ -2,10 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Semester_Project_0._1.Services;
 using Semester_Project_0._1.Utility;
+using Semester_Project_0._1.Models;
+using Semester_Project_0._1.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Semester_Project_0._1.Data;
 
 namespace Semester_Project_0._1.Controllers
 {
@@ -14,10 +17,12 @@ namespace Semester_Project_0._1.Controllers
     public class ClassController : Controller
     {
         private readonly IClassService _classService;
+        private readonly ApplicationDBContext _db;
 
-        public ClassController(IClassService classService)
+        public ClassController(IClassService classService, ApplicationDBContext db)
         {
             _classService = classService;
+            _db = db;
         }
         //[Authorize(Roles = Helper.Admin)]
         public IActionResult Index()
@@ -45,6 +50,11 @@ namespace Semester_Project_0._1.Controllers
             ViewBag.Days = Helper.DaysOfTheWeek();
             ViewBag.WeekOfTheMonth = Helper.WeekOfTheMonth();
             return View();
+        }
+
+        public IActionResult RecurringClassIndex() {
+            IEnumerable<RecurringClassInstent> objList = _db.RecurringClasses;
+            return View(objList);
         }
     }
 }

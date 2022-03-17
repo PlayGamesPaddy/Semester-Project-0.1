@@ -244,6 +244,7 @@ function rClassSubmit() {
         Description: $("#description").val(),
         Duration: $("#duration").val(),
         InstructerId: $("#instructureId").val(),
+        MaxNumberOfStudents: $("#numberOfStudents").val(),
         RecurringType: radioselected,
 
         weeklyday: $("#weeklyday").val(),
