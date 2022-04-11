@@ -20,12 +20,14 @@ namespace Semester_Project_0._1.Controllers
         private readonly IClassService _classService;
         private readonly ApplicationDBContext _db;
         private readonly InterfaceUserService _userService;
+        public InterfaceRecurringClassService _RCService;
 
-        public ClassController(IClassService classService, ApplicationDBContext db, InterfaceUserService UserService)
+        public ClassController(IClassService classService, ApplicationDBContext db, InterfaceUserService UserService, InterfaceRecurringClassService RecurringClassService)
         {
             _classService = classService;
             _db = db;
             _userService = UserService;
+            _RCService = RecurringClassService;
         }
         //[Authorize(Roles = Helper.Admin)]
         public IActionResult Index()
@@ -58,7 +60,13 @@ namespace Semester_Project_0._1.Controllers
         public IActionResult RecurringClassIndex() {
 
             ViewBag.studentList = _userService.GetUsersStudents();
-            IEnumerable<RecurringClassInstent> objList = _db.RecurringClasses;
+            IEnumerable<RecurringClassInstent> objList = _db.RecurringClasses.OrderByDescending(item=>item.FirstClassDate);
+            foreach(var rC in objList)
+            {
+                List<ClassStudentList> iecl = _db.ClassStudentList.Where(x => x.recurringClassInstentId == rC.Id).ToList();
+                rC.StudentList = iecl;
+            }
+            IEnumerable<ClassStudentList> CSL = _db.ClassStudentList;
             return View(objList);
         }
 

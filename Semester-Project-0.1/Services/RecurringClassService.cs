@@ -95,6 +95,7 @@ namespace Semester_Project_0._1.Services
             RecurringClassInstent rci = _db.RecurringClasses.Find(model.recurringClassInstentId);
             classStudent1.recurringClassInstent = rci;
             classStudent1.student = _db.Students.Find(model.studentId);
+            //rci.StudentsEnrolled= rci.StudentsEnrolled+1;
             if (rci.StudentList==null)
             {
                 List<ClassStudentList> scList = new List<ClassStudentList>();
@@ -131,6 +132,11 @@ namespace Semester_Project_0._1.Services
             }
             await _db.SaveChangesAsync();
             return 2;
+        }
+
+        public int GetStudentCount(int RCid)
+        {
+            return _db.ClassStudentList.Where(RC => RC.recurringClassInstentId == RCid).Count();
         }
     }
 

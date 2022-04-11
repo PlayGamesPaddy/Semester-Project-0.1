@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Semester_Project_0._1.Data;
 using Semester_Project_0._1.Models;
 using Semester_Project_0._1.Models.ViewModels;
 using Semester_Project_0._1.Services;
@@ -21,9 +22,11 @@ namespace Semester_Project_0._1.Controllers.Api
         private readonly IHttpContextAccessor _HttpContextAccessor;
         private readonly string loginUserId;
         private readonly string role;
+        private readonly ApplicationDBContext _db;
 
-        public RecurringClassApiController(IClassService classService, InterfaceRecurringClassService recurringClassService, IHttpContextAccessor httpContextAccessor)
+        public RecurringClassApiController(IClassService classService, InterfaceRecurringClassService recurringClassService, IHttpContextAccessor httpContextAccessor, ApplicationDBContext db)
         {
+            _db = db;
             _RecurringClassService = recurringClassService;
             _classService = classService;
             _HttpContextAccessor = httpContextAccessor;
@@ -199,18 +202,25 @@ namespace Semester_Project_0._1.Controllers.Api
         [Route("EnrollStudent")]
         public IActionResult EnrollStudent(ClassStudentList data)
         {
-
+                //RecurringClassInstent rci = _db.RecurringClasses.Find(model.recurringClassInstentId);
             ClassStudentList classStudentList = new ClassStudentList();
 
             classStudentList.id = data.id;
             classStudentList.studentId = data.studentId;
             classStudentList.recurringClassInstentId = data.recurringClassInstentId;
-
+            ClassStudentList classStudentListCheack = _db.ClassStudentList.FirstOrDefault(cs => cs.studentId == classStudentList.studentId && cs.recurringClassInstentId == classStudentList.recurringClassInstentId);
+            
 
 
             CommonResponse<int> commonResponse = new CommonResponse<int>();
             try
             {
+                if (classStudentListCheack != null)
+                {
+                    commonResponse.status = 3;
+                    commonResponse.message = "this Student is already Enrollrd in this class.";
+                    return Ok(commonResponse);
+                }
                 commonResponse.status = _RecurringClassService.EnroleStudent(classStudentList).Result;
                 if (commonResponse.status == 1)
                 {

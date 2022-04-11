@@ -13,5 +13,6 @@ namespace Semester_Project_0._1.Services
         public Task<int> EnroleStudent(ClassStudentList model);
         public Task<int> AddComment(ClassStudentComment model);
         public Task<int> UnEnroleStudent(int Id);
+        public int GetStudentCount(int RCid);
     }
 }

@@ -33,6 +33,9 @@ function enroleStudent() {
                 $.notify(response.message, "success");
                 window.location.href = '/Class/RecurringClassInfo/' + requestData.recurringClassInstentId   ;
             }
+            if (response.status === 3) {
+                $.notify(response.message, "error");
+            }
             else {
                 $.notify("1" + response.message, "error");
             }

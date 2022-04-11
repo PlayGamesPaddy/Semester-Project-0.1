@@ -27,6 +27,9 @@ namespace Semester_Project_0._1.Models
         // StudentId temp will need to change to reference to student list
         [DisplayName("Class Size")]
         public int MaxNumberOfStudents { get; set; }
+        //[DisplayName("Students Enrolled")]
+        //[DefaultValue(0)]
+        //public int StudentsEnrolled { get; set; }
         public List<ClassStudentList> StudentList { get; set; }
         public List<ClassInstent> Classlist { set; get; }
         [DisplayName("Recurring Type")]

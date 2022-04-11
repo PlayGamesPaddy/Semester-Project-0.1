@@ -8,14 +8,22 @@
         </div>
             <span class="sr-only">Toggle Dropdown</span>
             <div class="dropdown-menu align-bottom-align-r wi">
+                <h5>Your Account</h5>
                 <a class="dropdown-item" asp-area="" asp-controller="Student" asp-action="Index">Sudents</a>
                 <div class="dropdown-divider"></div>
+                @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin))
+                {
+                    <h5>Admin Controlles</h5>
+                    <a class="dropdown-item" asp-controller="Account" asp-action="Register" >Admin Registration</a>
+                }
                 @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin) || User.IsInRole(Semester_Project_0._1.Utility.Helper.SystemAdmin) || User.IsInRole(Semester_Project_0._1.Utility.Helper.Instructure))
                 {
 
-                    <a class="dropdown-item" asp-controller="Class" asp-action="RecurringClassSetup">creathe a recering class</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" asp-controller="Class" asp-action="RecurringClassSetup">Make A Recering Class</a>
+                    <a class="dropdown-item" asp-controller="Class" asp-action="RecurringClassIndex">Recurring Class List</a>
                 }
-                <a class="dropdown-item" href="#">Another action</a>
+
                 <a class="dropdown-item" href="#">Something else here</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Separated link</a>
