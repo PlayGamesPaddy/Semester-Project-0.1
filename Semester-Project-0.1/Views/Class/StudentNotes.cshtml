@@ -1,0 +1,136 @@
+﻿@model Semester_Project_0._1.Models.ViewModels.StudentClassVM;
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Student Notes";
+}
+<input id="studentId" asp-for="classStudentList.studentId" hidden />
+<input id="ClassStudentListid" asp-for="classStudentList.id" hidden />
+<div class="border p-3">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group row">
+        <h2 class="text-black-50 pl-3">Student</h2>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="classStudentList.student.StudentNameFirst"></label>
+                </div>
+                <div class="col-3">
+                    <label asp-for="classStudentList.student.StudentNameLast"></label>
+                </div>
+                <div class="col-3">
+                    
+                </div>
+                <div class="col-3">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-3">
+            <input asp-for="classStudentList.student.StudentNameFirst" disabled class="form-control" />
+        </div>
+        <div class="col-3">
+            <input asp-for="classStudentList.student.StudentNameLast" disabled class="form-control" />
+        </div>
+        <div class="col-3">
+        </div>
+        <div class="col-3">
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!---->
+
+
+
+
+<div class="row d-flex justify-content-center">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+            <div class="card-body p-1">
+
+                
+                <!---->
+                @if (Model.classStudentComments == null || Model.classStudentComments.Count < 1)
+                {
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-start align-items-center">
+                                <p class="mt-3 mb-4 pb-2">
+                                    no Note About the student
+                                </p>
+
+                                <div class="small d-flex justify-content-start">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    @foreach (var Comment in Model.classStudentComments)
+                    {
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-start align-items-center">
+                                    <img class="rounded-circle shadow-1-strong me-3"
+                                         src="~/lib/Images/Icons/WitchCraftIcons_02_b.png" alt="avatar" width="60"
+                                         height="60" />
+                                    <div>
+                                        <h6 class="fw-bold text-primary mb-1">@Comment.commentator.FullName</h6>
+                                        <p class="text-muted small mb-0">
+                                            Date - @Comment.CommentDate
+                                        </p>
+                                    </div>
+                                </div>
+                                <p>
+                                    @Comment.Text
+                                </p>
+
+                            </div>
+                        </div>
+
+                    }
+                }
+                <!---->
+                
+
+
+
+
+
+                <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+
+                    <h5 class="text-center row">Comment</h5>
+                    <div class="d-flex flex-start w-100">
+                        <img class="rounded-circle shadow-1-strong me-3"
+                             src="~/lib/Images/Icons/WitchCraftIcons_02_b.png" alt="avatar" width="40"
+                             height="40" />
+                        <div class="form-outline w-100 p-1">
+                            <textarea class="form-control" id="textAreaComment"
+                                      style="background: #fff;"></textarea>
+                        </div>
+                    </div>
+                    <div class="float-end float-right mt-2 pt-1">
+
+                        <button type="button" id="btnSubmit" class="btn btn-primary btn-sm" onclick="addComment();">Post comment</button>
+                    </div>
+                </div>
+                <!---->
+            </div>
+                                </div>
+                        </div>
+                    </div>
+<script src="~/js/class-schedule.js"></script>
+<!---->

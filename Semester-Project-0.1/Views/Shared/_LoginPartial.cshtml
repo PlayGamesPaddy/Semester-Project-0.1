@@ -13,7 +13,7 @@
                 @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin) || User.IsInRole(Semester_Project_0._1.Utility.Helper.SystemAdmin) || User.IsInRole(Semester_Project_0._1.Utility.Helper.Instructure))
                 {
 
-                    <a class="dropdown-item" href="Class/RecurringClassSetup">creathe a recering class</a>
+                    <a class="dropdown-item" asp-controller="Class" asp-action="RecurringClassSetup">creathe a recering class</a>
                 }
                 <a class="dropdown-item" href="#">Another action</a>
                 <a class="dropdown-item" href="#">Something else here</a>

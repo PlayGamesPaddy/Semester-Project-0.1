@@ -14,7 +14,7 @@ namespace Semester_Project_0._1.Services
         public List<StudentVM> GetStudentList();
         public Task<int> AddUpdate(ClassVM model);
         public List<ClassVM> InstructureEventsById(string InstructerId);
-
+        public List<ClassVM> StudentEventsByRecurringClassId(int recurringClassId);
         public List<ClassVM> StudentEventsById(int StudentId);
         public ClassVM GetById(int id);
         public Task<int> Delete(int id);

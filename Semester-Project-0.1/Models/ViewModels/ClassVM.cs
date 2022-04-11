@@ -21,6 +21,7 @@ namespace Semester_Project_0._1.Models.ViewModels
         public bool IsApproved { set; get; }
         public string AdminId { get; set; }
 
+        public int? RecurringClassInstentId { get; set; }
 
         //names
         public string InstructureName { get; set; }

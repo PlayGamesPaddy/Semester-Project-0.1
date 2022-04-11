@@ -16,7 +16,7 @@
     {
 
 
-<table class="table tabble-bordered table-striped" style="width:99%">
+        <table class="table tabble-bordered table-striped" style="width:99%">
             <thread>
                 <tr>
                     <th>
@@ -37,39 +37,40 @@
                     <th>
                         Options
                     </th>
-                    
+
                 </tr>
             </thread>
             <tbody>
                 @foreach (var Rclass in Model)
                 {
 
-                <tr>
-                    <!--width="10%"-->
-                    <td>@Rclass.Title</td>
-                    <td>@Rclass.Duration</td>
-                    <td>@Rclass.FirstClassDate</td>
-                    <td>@Rclass.LastClassDate</td>
-                    <td>@Rclass.RecurringType</td>
-                    <td>
-                        @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin) || User.IsInRole(Semester_Project_0._1.Utility.Helper.SystemAdmin) || User.IsInRole(Semester_Project_0._1.Utility.Helper.Instructure))
-                        {
-                            <!--working hear-->
-                            <a asp-controller="" asp-action="Update" asp-route-id="@Rclass.Id" class="btn btn-primary mx-1">Update</a>
-                            <a asp-controller="" asp-action="Delete" asp-route-id="@Rclass.Id" class="btn btn-danger mx-1">Delete</a>
+                    <tr>
+                        <!--width="10%"-->
+                        <td>@Rclass.Title</td>
+                        <td>@Rclass.Duration</td>
+                        <td>@Rclass.FirstClassDate</td>
+                        <td>@Rclass.LastClassDate</td>
+                        <td>@Rclass.RecurringType</td>
+                        <td>
+                            @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin) || User.IsInRole(Semester_Project_0._1.Utility.Helper.SystemAdmin) || User.IsInRole(Semester_Project_0._1.Utility.Helper.Instructure))
+                            {
+                                <a asp-controller="" asp-action="Update" asp-route-id="@Rclass.Id" class="btn btn-primary mx-1">Update</a>
+                                <a asp-controller="Class" asp-action="RecurringClassDelete" asp-route-id="@Rclass.Id" class="btn btn-danger mx-1" onclick="RClassDelete()">Delete</a>
 
-                        }
-                        <a asp-controller="" asp-action="Enroll" asp-route-id="@Rclass.Id" class="btn btn-success mx-1">Enroll</a>
-                        <a asp-controller="" asp-action="Info" asp-route-id="@Rclass.Id" class="btn btn-info mx-1">Info</a>
-                    </td>
-                </tr>
+                            }
+                            <a   class="btn btn-success mx-1" onclick="showStudentPopUp(@Rclass.Id);">Enroll</a>
+                            <a asp-controller="Class" asp-action="RecurringClassInfo" asp-route-id="@Rclass.Id" class="btn btn-info mx-1">Info</a>
+                        </td>
+                    </tr>
 
-                    }
+                }
             </tbody>
         </table>
+        <partial name="_AddStudents" />
     }
     else
     {
         <p> No items in the database</p>
     }
+    <script src="~/js/class-schedule.js"></script>
 </div>

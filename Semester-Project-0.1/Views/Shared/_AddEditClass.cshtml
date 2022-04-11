@@ -1,18 +1,13 @@
-﻿<div class="modal fade" role="dialog" id="classInput" data-backdrop="static" data-keyboard="false" >
+﻿
+<div class="modal fade" role="dialog" id="classInput" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <form id="classForm" autocomplete="off" novalidate="novalidate">
                 <div class="model-header">
-                    @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin))
-                    {
-                        <h4 class="modal-title">Add/Edit Class Info</h4>
-                    }
-                    else
-                    {
-                        
-                            <h4 class="modal-title">Class Details</h4>
-                        
-                    }
+                   
+
+                        <h4 class="modal-title"> add Student to Class</h4>
+
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
@@ -24,17 +19,25 @@
                         <label for="description">Descriptions</label>
                         <textarea type="text" class="form-control" id="description"></textarea>
                     </div>
-                    @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin)|| User.IsInRole(Semester_Project_0._1.Utility.Helper.Instructure))
+                    @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin) || User.IsInRole(Semester_Project_0._1.Utility.Helper.Instructure))
                     {
-                        <div class="form-group">
+                        /*<div class="form-group">
                             <label for="title">Select Student</label>
-                            <select id="studentId" asp-items="@(new SelectList(ViewBag.Studentlist,"StudentId","StudentNameFull"))" class="form-control">
+                            <select id="studentId" asp-items="(new SelectList(ViewBag.Studentlist," StudentId","StudentNameFull"))" class="form-control">
                                 <option>Please select one</option>
                             </select>
                         </div>
-                    }
+
+
+                        atsymbol //Html.DropDownList("studentId", new SelectList(ViewBag.Studentlist, "Id", "FullName", "FirstName"), new
+                        {
+                            atsymbol //class = "form-control select2", atsymbol//onchange = "OnInstructerIdChange()" })
+
+                            */
+
+                        }
                     else
-                    {
+                        {
                         @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Instructure))
                         {
                             <div class="form-group">
@@ -44,7 +47,7 @@
                             <div class="form-group">
                                 <label for="lblStatus">Status</label>
                                 <label class="form-control" disabled id="lblStatus" />
-                            </div>
+                            </div><!---->
                         }
                         @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.User))
                         {
@@ -73,7 +76,7 @@
                     <button type="button" class="btn btn-secondary" onclick="onCloseModal();">Close</button>&nbsp;
                     @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin))
                     {
-                        <button type="button" id="btnSubmit" class="btn btn-success" onclick="onSubmitForm();">Submit</button>
+                        //<button type="button" id="btnSubmit" class="btn btn-success" onclick="onSubmitForm();">Submit</button>
                         <button type="button" id="btnDelete" class="btn btn-danger" onclick="onDeleteClass();">Delete</button>
 
                         <button type="button" id="btnSubmit" class="btn btn-success" onclick="onSubmitForm();">Submit</button>

@@ -16,14 +16,16 @@ namespace Semester_Project_0._1.Controllers.Api
     [ApiController]
     public class RecurringClassApiController : Controller
     {
+        private readonly IClassService _classService;
         private readonly InterfaceRecurringClassService _RecurringClassService;
         private readonly IHttpContextAccessor _HttpContextAccessor;
         private readonly string loginUserId;
         private readonly string role;
 
-        public RecurringClassApiController(InterfaceRecurringClassService recurringClassService, IHttpContextAccessor httpContextAccessor)
+        public RecurringClassApiController(IClassService classService, InterfaceRecurringClassService recurringClassService, IHttpContextAccessor httpContextAccessor)
         {
             _RecurringClassService = recurringClassService;
+            _classService = classService;
             _HttpContextAccessor = httpContextAccessor;
             loginUserId = _HttpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -102,20 +104,23 @@ namespace Semester_Project_0._1.Controllers.Api
             try
             {
                 commonResponse.status = _RecurringClassService.AddUpdate(recurringClassInstentVM).Result;
-                if (commonResponse.status == 1)
+                /*if (commonResponse.status == 1)
                 {
                     commonResponse.message = Helper.classUpdated;
                 }
                 if (commonResponse.status == 2)
                 {
                     commonResponse.message = Helper.classAdded;
-                }
+                }*/
+                commonResponse.message = Helper.classAdded;
             }
             catch (Exception e)
             {
                 commonResponse.message = e.Message;
                 commonResponse.status = Helper.failure_code;
             }
+            //commonResponse.datenum = <int>recurringClassInstentVM.Id;
+            //commonResponse.datenum.add(recurringClassInstentVM);
             return Ok(commonResponse);
         }
         public bool isCorrectDay(DateTime date, string day)
@@ -139,8 +144,11 @@ namespace Semester_Project_0._1.Controllers.Api
             while (rightDay== false)
             {
                 rightDay = isCorrectDay(firstDate, dayOfTheWeek);
-                firstDate = firstDate.AddDays(1);
-                endDate = endDate.AddDays(1);
+                if (rightDay == false)
+                {
+                    firstDate = firstDate.AddDays(1);
+                    endDate = endDate.AddDays(1);
+                }
             }
             int i = 1;
             int dayccheack = DateTime.Compare(firstDate, lastDate);
@@ -167,6 +175,91 @@ namespace Semester_Project_0._1.Controllers.Api
 
             return classlist;
         }
+
+        [HttpGet]
+        [Route("GetRecurringClassesCalendarData")]
+        public IActionResult GetRecurringClassesCalendarData(int recurringClassId)
+        {
+            CommonResponse<List<ClassVM>> commonResponse = new CommonResponse<List<ClassVM>>();
+            try
+            {
+                //commonResponse.datenum = _classService.StudentEventsById(instructureId);
+                commonResponse.datenum = _classService.StudentEventsByRecurringClassId(recurringClassId);
+                commonResponse.status = Helper.success_code;
+            }
+            catch (Exception e)
+            {
+                commonResponse.message = e.Message;
+                commonResponse.status = Helper.failure_code;
+            }
+            return Ok(commonResponse);
+        }
+
+        [HttpPost]
+        [Route("EnrollStudent")]
+        public IActionResult EnrollStudent(ClassStudentList data)
+        {
+
+            ClassStudentList classStudentList = new ClassStudentList();
+
+            classStudentList.id = data.id;
+            classStudentList.studentId = data.studentId;
+            classStudentList.recurringClassInstentId = data.recurringClassInstentId;
+
+
+
+            CommonResponse<int> commonResponse = new CommonResponse<int>();
+            try
+            {
+                commonResponse.status = _RecurringClassService.EnroleStudent(classStudentList).Result;
+                if (commonResponse.status == 1)
+                {
+                    commonResponse.message = Helper.classUpdated;
+                }
+                if (commonResponse.status == 2)
+                {
+                    commonResponse.message = Helper.classAdded;
+                }
+            }
+            catch (Exception e)
+            {
+                commonResponse.message = e.Message;
+                commonResponse.status = Helper.failure_code;
+            }
+            return Ok(commonResponse);
+        }
+        [HttpPost]
+        [Route("addComment")]
+        public IActionResult addComment(ClassStudentComment data)
+        {
+            ClassStudentComment classStudentComment = new ClassStudentComment();
+
+            classStudentComment.ClassStudentListid = data.ClassStudentListid;
+            classStudentComment.CommentDate = data.CommentDate;
+            classStudentComment.Text = data.Text;
+
+
+
+            CommonResponse<int> commonResponse = new CommonResponse<int>();
+            try
+            {
+                commonResponse.status = _RecurringClassService.AddComment(classStudentComment).Result;
+                if (commonResponse.status == 1)
+                {
+                    commonResponse.message = Helper.classUpdated;
+                }
+                if (commonResponse.status == 2)
+                {
+                    commonResponse.message = Helper.classAdded;
+                }
+            }
+            catch (Exception e)
+            {
+                commonResponse.message = e.Message;
+                commonResponse.status = Helper.failure_code;
+            }
+            return Ok(commonResponse);
+        }
     }
-    
+
 }

@@ -268,6 +268,56 @@ namespace Semester_Project_0._1.Migrations
                     b.ToTable("Classes");
                 });
 
+            modelBuilder.Entity("Semester_Project_0._1.Models.ClassStudentComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ClassStudentListid")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CommentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("commentatorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassStudentListid");
+
+                    b.HasIndex("commentatorId");
+
+                    b.ToTable("ClassStudentComment");
+                });
+
+            modelBuilder.Entity("Semester_Project_0._1.Models.ClassStudentList", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("recurringClassInstentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("studentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("recurringClassInstentId");
+
+                    b.HasIndex("studentId");
+
+                    b.ToTable("ClassStudentList");
+                });
+
             modelBuilder.Entity("Semester_Project_0._1.Models.Item", b =>
                 {
                     b.Property<int>("Id")
@@ -377,29 +427,6 @@ namespace Semester_Project_0._1.Migrations
                     b.ToTable("StudentTypes");
                 });
 
-            modelBuilder.Entity("Semester_Project_0._1.Models.classStudentList", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("RecurringClassInstentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("recuringClassId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("studentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("RecurringClassInstentId");
-
-                    b.ToTable("classStudentList");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -453,9 +480,41 @@ namespace Semester_Project_0._1.Migrations
 
             modelBuilder.Entity("Semester_Project_0._1.Models.ClassInstent", b =>
                 {
-                    b.HasOne("Semester_Project_0._1.Models.RecurringClassInstent", null)
+                    b.HasOne("Semester_Project_0._1.Models.RecurringClassInstent", "RecurringClassInstent")
                         .WithMany("Classlist")
                         .HasForeignKey("RecurringClassInstentId");
+
+                    b.Navigation("RecurringClassInstent");
+                });
+
+            modelBuilder.Entity("Semester_Project_0._1.Models.ClassStudentComment", b =>
+                {
+                    b.HasOne("Semester_Project_0._1.Models.ClassStudentList", "ClassStudentList")
+                        .WithMany("ClassStudentComment")
+                        .HasForeignKey("ClassStudentListid");
+
+                    b.HasOne("Semester_Project_0._1.Models.ApplicationUser", "commentator")
+                        .WithMany()
+                        .HasForeignKey("commentatorId");
+
+                    b.Navigation("ClassStudentList");
+
+                    b.Navigation("commentator");
+                });
+
+            modelBuilder.Entity("Semester_Project_0._1.Models.ClassStudentList", b =>
+                {
+                    b.HasOne("Semester_Project_0._1.Models.RecurringClassInstent", "recurringClassInstent")
+                        .WithMany("StudentList")
+                        .HasForeignKey("recurringClassInstentId");
+
+                    b.HasOne("Semester_Project_0._1.Models.Student", "student")
+                        .WithMany()
+                        .HasForeignKey("studentId");
+
+                    b.Navigation("recurringClassInstent");
+
+                    b.Navigation("student");
                 });
 
             modelBuilder.Entity("Semester_Project_0._1.Models.RecurringClassInstent", b =>
@@ -478,11 +537,9 @@ namespace Semester_Project_0._1.Migrations
                     b.Navigation("StudentType");
                 });
 
-            modelBuilder.Entity("Semester_Project_0._1.Models.classStudentList", b =>
+            modelBuilder.Entity("Semester_Project_0._1.Models.ClassStudentList", b =>
                 {
-                    b.HasOne("Semester_Project_0._1.Models.RecurringClassInstent", null)
-                        .WithMany("StudentList")
-                        .HasForeignKey("RecurringClassInstentId");
+                    b.Navigation("ClassStudentComment");
                 });
 
             modelBuilder.Entity("Semester_Project_0._1.Models.RecurringClassInstent", b =>

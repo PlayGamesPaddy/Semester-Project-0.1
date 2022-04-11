@@ -36,6 +36,7 @@ namespace Semester_Project_0._1
             services.AddControllersWithViews();
 
             services.AddTransient<IClassService, ClassService>();
+            services.AddTransient<InterfaceUserService, UserService>();
 
             services.AddTransient<InterfaceRecurringClassService, RecurringClassService>();
 

@@ -20,5 +20,7 @@ namespace Semester_Project_0._1.Data
         public DbSet<StudentType> StudentTypes { get; set; }
         public DbSet<ClassInstent> Classes { get; set; }
         public DbSet<RecurringClassInstent> RecurringClasses { get;set;}
+        public DbSet<ClassStudentList> ClassStudentList { get; set; }
+        public DbSet<ClassStudentComment> ClassStudentComment { get; set; }
     }
 }

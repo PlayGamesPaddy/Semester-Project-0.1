@@ -16,10 +16,12 @@ namespace Semester_Project_0._1.Services
     {
         private readonly ApplicationDBContext _db;
         private readonly IEmailSender _emailSender;
+        //private readonly IClassService _classService;
         public ClassService(ApplicationDBContext db, IEmailSender emailSender)
         {
             _db = db;
             _emailSender = emailSender;
+            //ViewBag.Studentlist = _classService.GetStudentList();
         }
         public List<InstructureVM> GetInstructureList()
         {
@@ -85,8 +87,8 @@ namespace Semester_Project_0._1.Services
             {
                 InId = model.InstructerId;
             }
-            var Instructer = _db.Users.FirstOrDefault(u=>u.Id == model.InstructerId);
-            var student = _db.Students.FirstOrDefault(u => u.StudentId == model.StudentId);
+            //var Instructer = _db.Users.FirstOrDefault(u=>u.Id == model.InstructerId);
+            //var student = _db.Students.FirstOrDefault(u => u.StudentId == model.StudentId);
             if (model != null && model.Id > 0)
            {
                 //update
@@ -96,11 +98,12 @@ namespace Semester_Project_0._1.Services
                 classInstent.StartDate = startDate;
                 classInstent.EndDate = endDate;
                 classInstent.Duration = model.Duration;
-                classInstent.InstructerId = model.InstructerId;
+                classInstent.RecurringClassInstentId = model.RecurringClassInstentId;
+                //classInstent.InstructerId = model.InstructerId;
                 // StudentId temp will need to change to reference to student list
-                classInstent.StudentId = model.StudentId;
-                classInstent.IsApproved = model.IsApproved;
-                classInstent.AdminId = model.AdminId;
+                //classInstent.StudentId = model.StudentId;
+                //classInstent.IsApproved = model.IsApproved;
+                //classInstent.AdminId = model.AdminId;
                 await _db.SaveChangesAsync();
 
 
@@ -118,14 +121,15 @@ namespace Semester_Project_0._1.Services
                     Duration = model.Duration,
                     InstructerId = model.InstructerId,
                     // StudentId temp will need to change to reference to student list
-                    StudentId = model.StudentId,
+                    //StudentId = model.StudentId,
                     IsApproved = model.IsApproved,
-                    AdminId = model.AdminId
+                    AdminId = model.AdminId,
+                    RecurringClassInstentId = model.RecurringClassInstentId
                 };
-                await _emailSender.SendEmailAsync(Instructer.Email, "Class Made",
+                /*await _emailSender.SendEmailAsync(Instructer.Email, "Class Made",
                     $"class has been made With{student.StudentNameFirst} {student.StudentNameLast} is created and pending status");
                 await _emailSender.SendEmailAsync(student.StudentEmail, "Class Made",
-                    $"class has been made With {Instructer.FullName} created and pending status");
+                    $"class has been made With {Instructer.FullName} created and pending status");*/
                 _db.Classes.Add(classI);
                await _db.SaveChangesAsync();
                 return 2;
@@ -151,6 +155,20 @@ namespace Semester_Project_0._1.Services
         public List<ClassVM> StudentEventsById(int StudentId)
         {
             return _db.Classes.Where(x => x.StudentId == StudentId).ToList().Select(c => new ClassVM()
+            {
+                Id = c.Id,
+                Description = c.Description,
+                StartDate = c.StartDate.ToString("yyyy-MM-dd HH:mm:ss"),
+                EndDate = c.EndDate.ToString("yyyy-MM-dd HH:mm:ss"),
+                Title = c.Title,
+                Duration = c.Duration,
+                IsApproved = c.IsApproved
+            }).ToList();
+        }
+
+        public List<ClassVM> StudentEventsByRecurringClassId(int recurringClassId)
+        {
+            return _db.Classes.Where(x => x.RecurringClassInstentId == recurringClassId).ToList().Select(c => new ClassVM()
             {
                 Id = c.Id,
                 Description = c.Description,
@@ -201,5 +219,7 @@ namespace Semester_Project_0._1.Services
             }
             return 0;
         }
+
+        
     }
 }

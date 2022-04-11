@@ -18,6 +18,8 @@ namespace Semester_Project_0._1.Models
         public int StudentId { get; set; }
         public bool IsApproved { set; get; }
         public string AdminId { get; set; }
+        public int? RecurringClassInstentId { get; set; }
+        public RecurringClassInstent RecurringClassInstent { get; set; }
 
     }
 }

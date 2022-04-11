@@ -8,15 +8,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace Semester_Project_0._1.Controllers
 {
     public class StudentController : Controller
     {
+        private readonly IHttpContextAccessor _HttpContextAccessor;
+        private readonly string loginUserId;
         private readonly ApplicationDBContext _db;
-        public StudentController(ApplicationDBContext db)
+        public StudentController(ApplicationDBContext db, IHttpContextAccessor httpContextAccessor)
         {
             _db = db;
+            _HttpContextAccessor = httpContextAccessor;
+            loginUserId = _HttpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
         public IActionResult Index()
         {
@@ -56,6 +62,7 @@ namespace Semester_Project_0._1.Controllers
         {
             if (ModelState.IsValid)
             {
+                obj.Student.PrimaryGuardian = loginUserId;
                 _db.Students.Add(obj.Student);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
@@ -94,13 +101,15 @@ namespace Semester_Project_0._1.Controllers
         //post delete
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DeletePost(StudentVM studentId)
+        public IActionResult DeletePost(StudentVM studentIn)
         {
-            var obj = _db.Students.Find(studentId.Student.StudentId);
+            var obj = _db.Students.Find(studentIn.Student.StudentId);
             if (obj == null)
             {
                 return NotFound();
             }
+            //working hear need to dele the student list frst
+            //< list > ClassStudentList classStudentList = new < List > ClassStudentList()
             _db.Students.Remove(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");

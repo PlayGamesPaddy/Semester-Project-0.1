@@ -1,4 +1,5 @@
-﻿using Semester_Project_0._1.Models.ViewModels;
+﻿using Semester_Project_0._1.Models;
+using Semester_Project_0._1.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,8 @@ namespace Semester_Project_0._1.Services
     public interface InterfaceRecurringClassService
     {
         public Task<int> AddUpdate(RecurringClassInstentVM model);
+        public Task<int> EnroleStudent(ClassStudentList model);
+        public Task<int> AddComment(ClassStudentComment model);
+        public Task<int> UnEnroleStudent(int Id);
     }
 }

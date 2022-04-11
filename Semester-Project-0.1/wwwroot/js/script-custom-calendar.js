@@ -42,11 +42,13 @@ $(document).ready(function () {
         dateInput: false
     });
     InitializeCalendar();
+    InitializeRClassCalendar();
     schedulingType();
     MultibleDayCB();
 });
 
 var calendar;
+var calendar2;
 function InitializeCalendar() {
     try {
         //document.addEventListener('DOMContentLoaded', function () {
@@ -123,6 +125,72 @@ function InitializeCalendar() {
     }
 }
 
+
+function InitializeRClassCalendar() {
+    try {
+        //document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar2');
+        if (calendarEl != null) {
+            calendar2 = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next,today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                selectable: true,
+                editable: false,
+                select: function (event) {
+                    onShowModal(event, null);
+                },
+                eventDisplay: 'block',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    $.ajax({
+                        url: routeURL + '/api/RecurringClassSetup/GetRecurringClassesCalendarData?recurringClassId=' + $("#RCId").val(),
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function (response) {
+                            var events = [];
+                            if (response.status === 1) {
+                                $.each(response.datenum, function (i, data) {
+                                    //for(let i = 0 ; i < response.dataenum.length; i++){
+                                    events.push({
+                                        title: data.title,
+                                        description: data.description,
+                                        start: data.startDate,
+                                        end: data.endDate,
+                                        backgroundColor: data.isApproved ? "#28a745" : "#dc3545",
+                                        borderColor: "#162466",
+                                        textColor: "white",
+                                        id: data.id
+                                    });
+
+                                })
+
+                            }
+
+
+                            successCallback(events);
+                        },
+                        error: function (xhr) {
+                            $.notify("Error", "error");
+                        }
+                    });
+                },
+                eventClick: function (info) {
+                    getEventDetailsByEventId(info.event);
+                }
+            });
+            calendar2.render();
+        }
+    }
+    catch (e) {
+        alert(e);
+    }
+}
+
+
+
 function onShowModal(obj, isEventDetail) {
     if (isEventDetail != null) {
 
@@ -166,7 +234,16 @@ function onCloseModal() {
 }
 
 function onSubmitForm() {
+    var pageNo;
+    pageNo = $("#pageNo").val();
     if (checkValidation()) {
+        var Rcid;
+        if ($("#RCId").val() == "" || $("#RCId").val() == null) {
+            Rcid = null;
+        }
+        else {
+            Rcid = $("#RCId").val();
+        }
         var requestData = {
             Id: parseInt($('#id').val()),
             Title: $("#title").val(),
@@ -174,7 +251,8 @@ function onSubmitForm() {
             Description: $("#description").val(),
             Duration: $("#duration").val(),
             InstructerId: $("#instructureId").val(),
-            StudentId: $("#studentId").val(),
+            StudentId: 0,
+            RecurringClassInstentId: Rcid
         };
 
         $.ajax({
@@ -184,7 +262,13 @@ function onSubmitForm() {
             contentType: 'application/json',
             success: function (response) {
                 if (response.status === 1 || response.status === 2) {
-                    calendar.refetchEvents();
+                    if (pageNo == 1) {
+                        calendar.refetchEvents();
+                    }
+                    else if (pageNo == 2) {
+                        calendar2.refetchEvents();
+                        $("#classTable").load(window.location.href + " #classTable");
+                    }
                     $.notify(response.message, "success");
                     onCloseModal();
                 }
@@ -271,37 +355,6 @@ function rClassSubmit() {
         onceaMonthradio: $("#onceaMonthradio").val(),
         mounthtimepicer: $("#mounthtimepicer").val(),
     };
-    /*const requestDataDays = [
-        $("#weeklyday").val(),
-
-        $("#cbMonday").val(),
-        $("#cbTuesday").val(),
-        $("#cbWednesday").val(),
-        $("#cbThursday").val(),
-        $("#cbFriday").val(),
-        $("#cbSaturday").val(),
-        $("#cbSunday").val(),
-
-        $("#secondweekdaysoftheweekradio").val(),
-
-        $("#onceaMonthradio").val(),
-
-    ];
-    const requestDataTimes = [
-        $("#weeklytimepicer").val(),
-
-        $("#montimepicker").val(),
-        $("#tuetimepicker").val(),
-        $("#wentimepicker").val(),
-        $("#thutimepicker").val(),
-        $("#fritimepicker").val(),
-        $("#sattimepicker").val(),
-        $("#suntimepicker").val(),
-
-        $("#secondweeklytimepicer").val(),
-
-        $("#mounthtimepicer").val(),
-    ];*/
 
     $.ajax({
         url: routeURL + '/api/RecurringClassSetup/SaveCalendarData',
@@ -309,8 +362,9 @@ function rClassSubmit() {
         data: JSON.stringify(requestData),
         contentType: 'application/json',
         success: function (response) {
-            if (response.status === 1 || response.status === 2) {
+            if (response.status >=0) {
                 $.notify(response.message, "success");
+                window.location.href = '/Class/RecurringClassInfo/' + response.status;
             }
             else {
                 $.notify("1" + response.message, "error");
@@ -379,6 +433,7 @@ function OnInstructerIdChange() {
 
 function onDeleteClass() {
     var id = parseInt($("#id").val());
+    var pageNo = $("#pageNo").val();
     $.ajax({
         url: routeURL + '/api/class/DeleteClass/' + id,
         type: 'GET',
@@ -387,7 +442,41 @@ function onDeleteClass() {
 
             if (response.status === 1) {
                 $.notify(response.message, "success")
-                calendar.refetchEvents();
+                if (pageNo == 1) {
+                    calendar.refetchEvents();
+                }
+                else if (pageNo == 2) {
+                    calendar2.refetchEvents();
+                }
+                onCloseModal();
+            }
+            else {
+                $.notify(response.message, "error")
+            }
+        },
+        error: function (xhr) {
+            $.notify("Error", "error");
+        }
+    });
+}
+function onDeleteClass(idin) {
+    var id = idin;
+    var pageNo = $("#pageNo").val();
+    $.ajax({
+        url: routeURL + '/api/class/DeleteClass/' + id,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function (response) {
+
+            if (response.status === 1) {
+                $.notify(response.message, "success")
+                if (pageNo == 1) {
+                    calendar.refetchEvents();
+                }
+                else if (pageNo == 2) {
+                    calendar2.refetchEvents();
+                    $("#classTableDiv").load(window.location.href + " #classTableDiv");
+                }
                 onCloseModal();
             }
             else {
@@ -410,7 +499,12 @@ function onConfirm() {
 
             if (response.status === 1) {
                 $.notify(response.message, "success")
-                calendar.refetchEvents();
+                if (pageNo == 1) {
+                    calendar.refetchEvents();
+                }
+                else if (pageNo == 2) {
+                    calendar2.refetchEvents();
+                }
                 onCloseModal();
             }
             else {
@@ -489,4 +583,6 @@ function MultibleDayCB() {
         $("#sundiv").removeClass('hide');
         $("#sundiv").show();
     }
+
+   
 }

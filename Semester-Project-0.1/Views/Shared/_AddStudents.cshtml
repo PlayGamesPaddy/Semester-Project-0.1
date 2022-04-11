@@ -1,0 +1,35 @@
+﻿
+<div class="modal fade" role="dialog" id="addStudentToClass" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="classForm" autocomplete="off" novalidate="novalidate">
+                <div class="model-header">
+                   
+
+                    <h4 class="modal-title">Enroll Student</h4>
+
+                </div>
+                <div class="modal-body">
+
+
+
+
+                    <div>
+                        <label for="title">Students</label>
+                        @Html.DropDownList("studentId", new SelectList(ViewBag.Studentlist, "StudentId", "StudentNameFull", "FirstName"), new
+                    { @class = "form-control select2", @onchange = "" })
+                        <!--<select id="duration" asp-items="ViewBag.studentList" class="form-control"></select>-->
+                    </div>
+
+                    <button type="button" id="btnEnroll" class="btn btn-success" onclick="enroleStudent()">Enroll</button>
+                    <button type="button" id="btnCancel" class="btn btn-secondary" onclick="closeStudentPopUp()">Cancel</button>
+
+
+                    <!--<button type="button" class="btn btn-secondary" onclick="inCloseModal();">Close</button>&nbsp;-->
+                    <input type="hidden" id="classStudentListId" />
+                    <input type="hidden" id="recurringClassInstentId" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
