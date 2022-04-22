@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
+using Semester_Project_0._1.Services;
 
 namespace Semester_Project_0._1.Controllers
 {
@@ -18,18 +19,30 @@ namespace Semester_Project_0._1.Controllers
         private readonly IHttpContextAccessor _HttpContextAccessor;
         private readonly string loginUserId;
         private readonly ApplicationDBContext _db;
-        public StudentController(ApplicationDBContext db, IHttpContextAccessor httpContextAccessor)
+        private readonly IClassService _classService;
+        public StudentController(ApplicationDBContext db, IHttpContextAccessor httpContextAccessor, IClassService classService)
         {
+            _classService = classService;
             _db = db;
             _HttpContextAccessor = httpContextAccessor;
             loginUserId = _HttpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
         public IActionResult Index()
         {
-            IEnumerable<Student> objList = _db.Students;
+            IEnumerable<StudentVM> objList = _db.Students.ToList().Select(c => new StudentVM()
+            {
+                Student = c,
+                StudentId = c.StudentId,
+                StudentNameFirst = c.StudentNameFirst,
+                StudentNameLast = c.StudentNameLast,
+                StudentNameFull=c.StudentNameFirst +" "+ c.StudentNameLast,
+                PrimaryGuardian = c.PrimaryGuardian
+            }).ToList(); 
             foreach(var obj in objList)
             {
-                obj.StudentType = _db.StudentTypes.FirstOrDefault(u => u.Id == obj.StudentTypeId);
+                obj.recurringClassList = _classService.GetStudentsRecurringClassList(obj.StudentId);
+                obj.Student.StudentType = _db.StudentTypes.FirstOrDefault(u => u.Id == obj.Student.StudentTypeId);
+                obj.classStudentList = _db.ClassStudentList.Where(s=> s.studentId == obj.StudentId).ToList();
             }
             return View(objList);
         }
@@ -110,6 +123,8 @@ namespace Semester_Project_0._1.Controllers
             }
             //working hear need to dele the student list frst
             //< list > ClassStudentList classStudentList = new < List > ClassStudentList()
+            studentIn.classStudentList = _db.ClassStudentList.Where(cSL => cSL.studentId == studentIn.Student.StudentId).ToList();
+            _db.ClassStudentList.RemoveRange(studentIn.classStudentList);
             _db.Students.Remove(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");

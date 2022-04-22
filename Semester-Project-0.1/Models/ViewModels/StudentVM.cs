@@ -16,5 +16,9 @@ namespace Semester_Project_0._1.Models.ViewModels
         public string PrimaryGuardian { set; get; }
 
         public IEnumerable<SelectListItem> TypeDropDown { get; set; }
+
+        public List<RecurringClassInstent> recurringClassList { get; set; }
+
+        public List<ClassStudentList> classStudentList { get; set; }
     }
 }

@@ -133,6 +133,7 @@ namespace Semester_Project_0._1.Controllers
             //IEnumerable<ClassInstent> classes = _db.Classes.Where(x => x.RecurringClassInstentId == id);
             return View(recurringClassInstentVM);
         }
+
         public IActionResult StudentNotes(int? id)
         {
             StudentClassVM classStudentNotes = new StudentClassVM();
@@ -147,5 +148,6 @@ namespace Semester_Project_0._1.Controllers
                 //new StudentClassVM();
             return View(classStudentNotes);
         }
+        
     }
 }

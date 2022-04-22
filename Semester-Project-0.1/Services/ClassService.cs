@@ -23,12 +23,12 @@ namespace Semester_Project_0._1.Services
             _emailSender = emailSender;
             //ViewBag.Studentlist = _classService.GetStudentList();
         }
-        public List<InstructureVM> GetInstructureList()
+        public List<InstructorVM> GetInstructureList()
         {
             var instructures = (from user in _db.Users
                                 join userRoles in _db.UserRoles on user.Id equals userRoles.UserId
                                 join roles in _db.Roles.Where(x => x.Name == Helper.Instructure) on userRoles.RoleId equals roles.Id
-                                select new InstructureVM
+                                select new InstructorVM
                                 {
                                     Id = user.Id,
                                     FirstName = user.FirstName,
@@ -220,6 +220,69 @@ namespace Semester_Project_0._1.Services
             return 0;
         }
 
-        
+        public List<ClassVM> UserStudentClasslist(string id)
+        {
+            List <Student> students = _db.Students.Where(u=>u.PrimaryGuardian==id).ToList();
+            List<ClassStudentList> CSL = new List<ClassStudentList>();
+            List<ClassVM> classList = new List<ClassVM>();
+            List<RecurringClassInstent> RCI = new List<RecurringClassInstent>();
+            foreach( var Student in students)
+            {
+                if (CSL.Count() < 1)
+                {
+                    CSL = (List<ClassStudentList>)_db.ClassStudentList.Where(cl => cl.studentId == Student.StudentId).ToList();
+                }
+                else
+                {
+                    CSL.AddRange((List<ClassStudentList>)_db.ClassStudentList.Where(cl => cl.studentId == Student.StudentId).ToList());
+                }
+                
+            }
+            foreach (var classStudentList in CSL)
+            {
+                if (RCI.Count()<1)
+                {
+                    RCI = (List<RecurringClassInstent>)_db.RecurringClasses.Where(rc=>rc.Id==classStudentList.recurringClassInstentId).ToList();
+                }
+                else
+                {
+                    RCI.AddRange((List<RecurringClassInstent>)_db.RecurringClasses.Where(rc => rc.Id == classStudentList.recurringClassInstentId).ToList());
+                }
+            }
+            foreach (var RC in RCI)
+            {
+                if (classList.Count()<1)
+                {
+                    classList = StudentEventsByRecurringClassId(RC.Id);
+                        //(List<ClassInstent>)_db.Classes.Where(classVM => classVM.RecurringClassInstentId==RC.Id).ToList();
+                }
+                else
+                {
+                    classList.AddRange(StudentEventsByRecurringClassId(RC.Id));
+                        //(List<ClassInstent>)_db.Classes.Where(classVM => classVM.RecurringClassInstentId == RC.Id).ToList());
+                }
+            }
+            return classList.Distinct().ToList(); ;
+        }
+
+        public List<RecurringClassInstent> GetStudentsRecurringClassList(int id)
+        {
+            List<ClassStudentList> CSL = new List<ClassStudentList>();
+            List<RecurringClassInstent> RCI = new List<RecurringClassInstent>();
+            CSL = (List<ClassStudentList>)_db.ClassStudentList.Where(cl => cl.studentId == id).ToList();
+            foreach (var classStudentList in CSL)
+            {
+                if (RCI.Count() < 1)
+                {
+                    RCI = (List<RecurringClassInstent>)_db.RecurringClasses.Where(rc => rc.Id == classStudentList.recurringClassInstentId).ToList();
+                }
+                else
+                {
+                    RCI.AddRange((List<RecurringClassInstent>)_db.RecurringClasses.Where(rc => rc.Id == classStudentList.recurringClassInstentId).ToList());
+                }
+            }
+            return RCI;
+        }
     }
 }
+/*StudentEventsByRecurringClassId(int recurringClassId)*/

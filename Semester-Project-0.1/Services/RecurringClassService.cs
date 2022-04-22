@@ -69,16 +69,7 @@ namespace Semester_Project_0._1.Services
             }
             return 0;
         }
-        public async Task<int> UnEnroleStudent(int Id)
-        {
-            var classStudent = _db.ClassStudentList.FirstOrDefault(x => x.id == Id);
-            if (classStudent != null)
-            {
-                _db.ClassStudentList.Remove(classStudent);
-                return await _db.SaveChangesAsync();
-            }
-            return 0;
-        }
+        
         public async Task<int> EnroleStudent(ClassStudentList model)
         {
             ClassStudentList classStudent1 = new ClassStudentList()
@@ -109,6 +100,58 @@ namespace Semester_Project_0._1.Services
             await _db.SaveChangesAsync();
             return 2;
         }
+        public async Task<int> UnEnroleStudent(ClassStudentList Id)
+        {
+            var classStudent = _db.ClassStudentList.FirstOrDefault(x => x.id == Id.id);
+            if (classStudent != null)
+            {
+                IEnumerable<ClassStudentComment> CSC = _db.ClassStudentComment.Where(x => x.ClassStudentListid == Id.id);
+                if (CSC != null)
+                {
+                    foreach (var comment in CSC)
+                    {
+                        _db.ClassStudentComment.Remove(comment);
+                    }
+                }
+
+
+                _db.ClassStudentList.Remove(classStudent);
+                await _db.SaveChangesAsync();
+            }
+            return 2;
+        }
+        public async Task<int> unEnroleStudent(ClassStudentList model)
+        {
+            ClassStudentList classStudent1 = new ClassStudentList()
+            {
+                studentId = model.studentId,
+                recurringClassInstentId = model.recurringClassInstentId
+            };
+            //_db.classStudentList.Add(classStudent1);
+            //Student enrolledStudent = _db.Students.Find(model.studentId);
+            //RecurringClassInstent rci = _db.RecurringClasses.Find(model.recurringClassInstentId);
+
+            //rci.StudentList.Add(model);
+
+            RecurringClassInstent rci = _db.RecurringClasses.Find(model.recurringClassInstentId);
+            classStudent1.recurringClassInstent = rci;
+            classStudent1.student = _db.Students.Find(model.studentId);
+            //rci.StudentsEnrolled= rci.StudentsEnrolled+1;
+            if (rci.StudentList == null)
+            {
+                List<ClassStudentList> scList = new List<ClassStudentList>();
+                scList.Remove(classStudent1);
+                rci.StudentList = scList;
+            }
+            else
+            {
+                rci.StudentList.Remove(classStudent1);
+            }
+            await _db.SaveChangesAsync();
+            return 2;
+        }
+
+
         public async Task<int> AddComment(ClassStudentComment model)
         {
             //var DateIn = DateTime.Parse(model.CommentDate);

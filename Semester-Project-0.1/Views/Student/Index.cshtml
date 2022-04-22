@@ -1,4 +1,4 @@
-﻿@model IEnumerable< Semester_Project_0._1.Models.Student> 
+﻿@model IEnumerable<Semester_Project_0._1.Models.ViewModels.StudentVM>
 
 @{
     ViewData["Title"] = "Index";
@@ -10,12 +10,13 @@
         <div class="row pt-6">
             <h2 class="text-primary">Student List</h2>
         </div>
-            <div class="col-6 text-right">
-                <a asp-controller="Student" asp-action="Create" class="btn btn-primary">Add new Student</a>
-            </div>
+        <div class="col-6 text-right">
+            <a asp-controller="Student" asp-action="Create" class="btn btn-primary">Add new Student</a>
         </div>
+    </div>
     <br />
-    @if(Model.Count()>0) { 
+    @if (Model.Count() > 0)
+    {
         <table class="table tabble-bordered table-striped" style="width:99%">
             <thread>
                 <tr>
@@ -41,7 +42,7 @@
                 {
 
 
-                    @if (student.PrimaryGuardian == User.Identity.Name|| User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin) || User.IsInRole(Semester_Project_0._1.Utility.Helper.SystemAdmin))
+                    @if (student.Student.StudentEmail == User.Identity.Name || User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin) || User.IsInRole(Semester_Project_0._1.Utility.Helper.SystemAdmin))
                     {
 
                         <tr>
@@ -49,7 +50,7 @@
                             <td>@student.StudentId</td>
                             <td>@student.StudentNameFirst</td>
                             <td>@student.StudentNameLast</td>
-                            <td>@student.StudentType.Name</td>
+                            <td>@student.Student.StudentType.Name</td>
                             <td>
                                 <div class="btn-group" role="group">
                                     <a asp-controller="Student" asp-action="Update" asp-route-id="@student.StudentId" class="btn btn-primary mx-1">Update</a>
@@ -57,15 +58,89 @@
                                 </div>
                             </td>
                         </tr>
-
                     }
                 }
             </tbody>
         </table>
+
+        @foreach (var Stu in Model)
+        {
+            if (Stu.recurringClassList.Count() > 0)
+            {
+                <div class="row pt-12">
+                    <h2 class="text-primary col-9">
+
+                        @Stu.StudentNameFull's Classes
+                    </h2>
+                    <div class="col-1 ">
+                        <div id="@Stu.StudentId+">
+                            <a class="btn mx-1 dropdown-toggle btn-primary" onclick="showTable(@Stu.StudentId)">Show Classes</a>
+                        </div>
+                        <div id="@Stu.StudentId-"  style="display:none">
+                            <a  class="btn mx-1 dropdown-toggle btn-primary" onclick="showTable(@Stu.StudentId)">Hide Classes</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="@Stu.StudentId" style="display:none">
+                    <table class="table tabble-bordered table-striped" style="width:99%">
+                        <thread>
+                            <tr>
+                                <th>
+                                    Title
+                                </th>
+                                <th>
+                                    Duration
+                                </th>
+                                <th>
+                                    FirstClassDate
+                                </th>
+                                <th>
+                                    LastClassDate
+                                </th>
+                                <th>
+                                    Type
+                                </th>
+                                <th>
+                                    Options
+                                </th>
+
+                            </tr>
+                        </thread>
+                        <tbody>
+                            @foreach (var Rclass in Stu.recurringClassList)
+                            {
+
+
+                                <tr>
+                                    <!--width="10%"-->
+                                    <td>@Rclass.Title</td>
+                                    <td>@Rclass.Duration</td>
+                                    <td>@Rclass.FirstClassDate</td>
+                                    <td>@Rclass.LastClassDate</td>
+                                    <td>@Rclass.RecurringType</td>
+                                    <td>
+                                        
+                                            <a class="btn btn-success mx-1" onclick="unenroleStudent(@Stu.Student.StudentId, @Rclass.Id);">Un-Enroll</a>
+
+                                        <a asp-controller="Class" asp-action="RecurringClassInfo" asp-route-id="@Rclass.Id" class="btn btn-info mx-1">Info</a>
+
+                                        <a asp-controller="Class" asp-action="StudentNotes" asp-route-id="@Stu.classStudentList.FirstOrDefault(cSL=> cSL.studentId == Stu.StudentId && cSL.recurringClassInstentId == Rclass.Id).id" class="btn btn-info mx-1">Notes</a>
+                                    </td>
+                                </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            }
+        }
+        <div id="studentCalendar" class="badge-dark"></div>
     }
     else
     {
         <p> No items in the database</p>
     }
+    <script src="~/js/class-schedule.js"></script>
 </div>
 

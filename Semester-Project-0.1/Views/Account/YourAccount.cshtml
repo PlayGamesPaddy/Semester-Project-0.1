@@ -1,0 +1,136 @@
+﻿@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Classes";
+}
+
+<div class="container">
+    <div class="a-section ya-personalized">
+        <div class="a-row a-spacing-base">
+            <h4>
+                Your Account
+            </h4>
+
+            <div class="container">
+                <div class="row g-3 p-y-2">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div id="StudentMenu" class="card h-100 view overlay" onclick="location.href='../Student';"  onmouseover="mouseOver('StudentMenu')" onmouseout="mouseOut('StudentMenu')">
+
+                            <div class="row g-0">
+                                <div class="col-md-2">
+                                    <img class=" shadow-1-strong me-3"
+                                         src="~/lib/Images/Icons/w_hourglass.png" width="60" />
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Your Student's Schedule</h5>
+                                        <p class="card-text">Edit, Enrol and see Schedule</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div id="ClassMenu" class="card h-100" onclick="location.href='../Class/RecurringClassIndex';"onmouseover="mouseOver('ClassMenu')" onmouseout="mouseOut('ClassMenu')">
+                            <div class="row g-0">
+                                <div class="col-md-2">
+                                    <img class=" shadow-1-strong me-3"
+                                         src="~/lib/Images/Icons/w_book.png" width="60" />
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="card-body">
+                                        <h5 class="card-title">See Ongoing Classes</h5>
+                                        <p class="card-text">Browse ongoing Classes</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div id="LogInMenu" class="card h-100" onmouseover="mouseOver('LogInMenu')" onmouseout="mouseOut('LogInMenu')">
+                            <div class="row g-0">
+                                <div class="col-md-2">
+                                    <img class="rounded-circle shadow-1-strong me-3"
+                                         src="~/lib/Images/Icons/w_shield.png"  width="60"/>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Login & Security</h5>
+                                        <p class="card-text">Edit Login and account settings</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Instructure)||User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin) || User.IsInRole(Semester_Project_0._1.Utility.Helper.SystemAdmin))
+                    {
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div id="RecuringClassSettupMenu" class="card h-100" onclick="location.href='../Class/RecurringClassSetup';" onmouseover="mouseOver('RecuringClassSettupMenu')" onmouseout="mouseOut('RecuringClassSettupMenu')">
+                                <div class="row g-0">
+                                    <div class="col-md-2">
+                                        <div class="col-md-2">
+                                            <img class="shadow-1-strong me-3"
+                                                 src="~/lib/Images/Icons/w_scroll.png" width="60" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Recuring Class Settup</h5>
+                                            <p class="card-text">Make a new recurring class</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div id="ManageMyClassesMenu" class="card  h-100" onclick="location.href='../Instructor/instructorclassmenu';" onmouseover="mouseOver('ManageMyClassesMenu')" onmouseout="mouseOut('ManageMyClassesMenu')">
+                                <div class="row g-0">
+                                    <div class="col-md-2">
+                                        <img class="shadow-1-strong me-3"
+                                             src="~/lib/Images/Icons/Books_2_R.png" width="60" />
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Manage My Classes</h5>
+                                            <p class="card-text">Edit Recurring Classes</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin) || User.IsInRole(Semester_Project_0._1.Utility.Helper.SystemAdmin))
+                    {
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div id="UserManagmentMenu" class="card h-100" onmouseover="mouseOver('UserManagmentMenu')" onmouseout="mouseOut('UserManagmentMenu')">
+                                <div class="row g-0">
+                                    <div class="col-md-2">
+                                        <img class="shadow-1-strong me-3"
+                                             src="~/lib/Images/Icons/w_anvil.png" width="60" />
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">User Managment</h5>
+                                            <p class="card-text">Reassign Instructure & manage users</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

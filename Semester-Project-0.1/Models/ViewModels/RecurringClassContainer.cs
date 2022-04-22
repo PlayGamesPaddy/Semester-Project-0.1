@@ -1,20 +1,29 @@
 ﻿using Semester_Project_0._1.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Semester_Project_0._1.Utility
+namespace Semester_Project_0._1.Models.ViewModels
 {
     public class RecurringClassContainer
     {
+        [Required]
         public string Title { get; set; }
+        [Required]
         public int MaxNumberOfStudents { get; set; }
+        [Required]
         public string FirstClassDate { get; set; }
+        [Required]
         public string LastClassDate { get; set; }
+        [Required]
         public string Description { get; set; }
+        [Required]
         public int Duration { get; set; }
+        [Required]
         public string InstructerId { get; set; }
+        [Required]
         public string RecurringType { get; set; }
 
 

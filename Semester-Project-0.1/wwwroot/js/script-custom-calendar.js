@@ -43,6 +43,8 @@ $(document).ready(function () {
     });
     InitializeCalendar();
     InitializeRClassCalendar();
+    InitializeStudentClassCalendar();
+    InitializeInstructureCalendar();
     schedulingType();
     MultibleDayCB();
 });
@@ -189,6 +191,131 @@ function InitializeRClassCalendar() {
     }
 }
 
+function InitializeInstructureCalendar() {
+    try {
+        //document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendarInstructure');
+        if (calendarEl != null) {
+            calendarInstructure = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next,today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                selectable: true,
+                editable: false,
+                select: function (event) {
+                    onShowModal(event, null);
+                },
+                eventDisplay: 'block',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    $.ajax({
+                        url: routeURL + '/api/RecurringClassSetup/GetInstructureClasses',
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function (response) {
+                            var events = [];
+                            if (response.status === 1) {
+                                $.each(response.datenum, function (i, data) {
+                                    //for(let i = 0 ; i < response.dataenum.length; i++){
+                                    events.push({
+                                        title: data.title,
+                                        description: data.description,
+                                        start: data.startDate,
+                                        end: data.endDate,
+                                        backgroundColor: data.isApproved ? "#28a745" : "#dc3545",
+                                        borderColor: "#162466",
+                                        textColor: "white",
+                                        id: data.id
+                                    });
+
+                                })
+
+                            }
+
+
+                            successCallback(events);
+                        },
+                        error: function (xhr) {
+                            $.notify("Error", "error");
+                        }
+                    });
+                },
+                eventClick: function (info) {
+                    getEventDetailsByEventId(info.event);
+                }
+            });
+            calendarInstructure.render();
+        }
+    }
+    catch (e) {
+        alert(e);
+    }
+}
+
+function InitializeStudentClassCalendar() {
+    try {
+        //document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('studentCalendar');
+        if (calendarEl != null) {
+            studentCalendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next,today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                selectable: true,
+                editable: false,
+                select: function (event) {
+                    onShowModal(event, null);
+                },
+                eventDisplay: 'block',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    $.ajax({
+                        url: routeURL + '/api/RecurringClassSetup/GetStudentClasses',
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function (response) {
+                            var events = [];
+                            if (response.status === 1) {
+                                $.each(response.datenum, function (i, data) {
+                                    //for(let i = 0 ; i < response.dataenum.length; i++){
+                                    events.push({
+                                        title: data.title,
+                                        description: data.description,
+                                        start: data.startDate,
+                                        end: data.endDate,
+                                        backgroundColor: data.isApproved ? "#28a745" : "#dc3545",
+                                        borderColor: "#162466",
+                                        textColor: "white",
+                                        id: data.id
+                                    });
+
+                                })
+
+                            }
+
+
+                            successCallback(events);
+                        },
+                        error: function (xhr) {
+                            $.notify("Error", "error");
+                        }
+                    });
+                },
+                eventClick: function (info) {
+                    getEventDetailsByEventId(info.event);
+                }
+            });
+            studentCalendar.render();
+        }
+    }
+    catch (e) {
+        alert(e);
+    }
+}
 
 
 function onShowModal(obj, isEventDetail) {
@@ -292,90 +419,208 @@ function rClassSubmit() {
     var friday = false;
     var saterday = false;
     var sunday = false;
-
-    if (document.getElementById('Radios1').checked) {
-        radioselected = $("#Radios1").val();
-    }
-    else if (document.getElementById('Radios2').checked) {
-        radioselected = $("#Radios2").val();
-
-
-        if (document.getElementById('cbMonday').checked) { monday = true;}
-        if (document.getElementById('cbTuesday').checked) { tuesday = true;}
-        if (document.getElementById('cbWednesday').checked) { wednesday = true;}
-        if (document.getElementById('cbThursday').checked) { thursday = true;}
-        if (document.getElementById('cbFriday').checked) { friday = true;}
-        if (document.getElementById('cbSaturday').checked) { saterday = true;}
-        if (document.getElementById('cbSunday').checked) { sunday = true;}
+    if (rClassCheckValidation()) {
+        if (document.getElementById('Radios1').checked) {
+            radioselected = $("#Radios1").val();
+        }
+        else if (document.getElementById('Radios2').checked) {
+            radioselected = $("#Radios2").val();
 
 
+            if (document.getElementById('cbMonday').checked) { monday = true; }
+            if (document.getElementById('cbTuesday').checked) { tuesday = true; }
+            if (document.getElementById('cbWednesday').checked) { wednesday = true; }
+            if (document.getElementById('cbThursday').checked) { thursday = true; }
+            if (document.getElementById('cbFriday').checked) { friday = true; }
+            if (document.getElementById('cbSaturday').checked) { saterday = true; }
+            if (document.getElementById('cbSunday').checked) { sunday = true; }
 
-    }
-    else if (document.getElementById('Radios3').checked) {
-        radioselected = $("#Radios3").val();
+
+
+        }
+        else if (document.getElementById('Radios3').checked) {
+            radioselected = $("#Radios3").val();
+        }
+        else {
+            radioselected = $("#Radios4").val();
+        }
+
+
+
+        var requestData = {
+            Id: parseInt($('#id').val()),
+            Title: $("#Title").val(),
+            FirstClassDate: $("#datepicker").val(),
+            LastClassDate: $("#lastdatepicker").val(),
+            Description: $("#Description").val(),
+            Duration: $("#duration").val(),
+            InstructerId: $("#instructureId").val(),
+            MaxNumberOfStudents: $("#MaxNumberOfStudents").val(),
+            RecurringType: radioselected,
+
+            weeklyday: $("#weeklyday").val(),
+            weeklytimepicer: $("#weeklytimepicer").val(),
+
+            cbMonday: monday,
+            montimepicker: $("#montimepicker").val(),
+            cbTuesday: tuesday,
+            tuetimepicker: $("#tuetimepicker").val(),
+            cbWednesday: wednesday,
+            wentimepicker: $("#wentimepicker").val(),
+            cbThursday: thursday,
+            thutimepicker: $("#thutimepicker").val(),
+            cbFriday: friday,
+            fritimepicker: $("#fritimepicker").val(),
+            cbSaturday: saterday,
+            sattimepicker: $("#sattimepicker").val(),
+            cbSunday: sunday,
+            suntimepicker: $("#suntimepicker").val(),
+
+            secondweekdaysoftheweekradio: $("#secondweekdaysoftheweekradio").val(),
+            secondweeklytimepicer: $("#secondweeklytimepicer").val(),
+
+            onceaMonthradio: $("#onceaMonthradio").val(),
+            mounthtimepicer: $("#mounthtimepicer").val(),
+        };
+
+        $.ajax({
+            url: routeURL + '/api/RecurringClassSetup/SaveCalendarData',
+            type: 'POST',
+            data: JSON.stringify(requestData),
+            contentType: 'application/json',
+            success: function (response) {
+                if (response.status >= 0) {
+                    $.notify(response.message, "success");
+                    window.location.href = '/Class/RecurringClassInfo/' + response.status;
+                }
+                else {
+                    $.notify("1" + response.message, "error");
+                }
+            },
+            error: function (xhr) {
+                $.notify("Error", "error");
+            }
+        });
     }
     else {
-        radioselected = $("#Radios4").val();
+        $.notify("Please fill in all required feilds", "error");
     }
-
-
-
-    var requestData = {
-        Id: parseInt($('#id').val()),
-        Title: $("#title").val(),
-        FirstClassDate: $("#datepicker").val(),
-        LastClassDate: $("#lastdatepicker").val(),
-        Description: $("#description").val(),
-        Duration: $("#duration").val(),
-        InstructerId: $("#instructureId").val(),
-        MaxNumberOfStudents: $("#numberOfStudents").val(),
-        RecurringType: radioselected,
-
-        weeklyday: $("#weeklyday").val(),
-        weeklytimepicer: $("#weeklytimepicer").val(),
-
-        cbMonday: monday,
-        montimepicker: $("#montimepicker").val(),
-        cbTuesday: tuesday,
-        tuetimepicker: $("#tuetimepicker").val(),
-        cbWednesday: wednesday,
-        wentimepicker: $("#wentimepicker").val(),
-        cbThursday: thursday,
-        thutimepicker: $("#thutimepicker").val(),
-        cbFriday: friday,
-        fritimepicker: $("#fritimepicker").val(),
-        cbSaturday: saterday,
-        sattimepicker: $("#sattimepicker").val(),
-        cbSunday: sunday,
-        suntimepicker: $("#suntimepicker").val(),
-
-        secondweekdaysoftheweekradio: $("#secondweekdaysoftheweekradio").val(),
-        secondweeklytimepicer: $("#secondweeklytimepicer").val(),
-
-        onceaMonthradio: $("#onceaMonthradio").val(),
-        mounthtimepicer: $("#mounthtimepicer").val(),
-    };
-
-    $.ajax({
-        url: routeURL + '/api/RecurringClassSetup/SaveCalendarData',
-        type: 'POST',
-        data: JSON.stringify(requestData),
-        contentType: 'application/json',
-        success: function (response) {
-            if (response.status >=0) {
-                $.notify(response.message, "success");
-                window.location.href = '/Class/RecurringClassInfo/' + response.status;
-            }
-            else {
-                $.notify("1" + response.message, "error");
-            }
-        },
-        error: function (xhr) {
-            $.notify("Error", "error");
-        }
-    });
 }
+function rClassCheckValidation() {
+    var isValid = true;
+    if ($("#Title").val() === undefined || $("#Title").val() === "" || $("#Title").val() === " ") {
+        isValid = false;
+        $("#Title").addClass('error');
+    }
+    else {
+        $("#Title").removeClass('error');
+    }
+    if ($("#MaxNumberOfStudents").val() === undefined || $("#MaxNumberOfStudents").val() === "" || $("#MaxNumberOfStudents").val() === " ") {
+        isValid = false;
+        $("#MaxNumberOfStudents").addClass('error');
+    }
+    else {
+        $("#MaxNumberOfStudents").removeClass('error');
+    }
+    if ($("#Description").val() === undefined || $("#Description").val() === "" || $("#Description").val() === " ") {
+        isValid = false;
+        $("#Description").addClass('error');
+    }
+    else {
+        $("#Description").removeClass('error');
+    }
+    if ($("#datepicker").val() === undefined || $("#datepicker").val() === "" || $("#datepicker").val() === " ") {
+        isValid = false;
+        $("#datepicker").addClass('error');
+    }
+    else {
+        $("#datepicker").removeClass('error');
+    }
+    if ($("#lastdatepicker").val() === undefined || $("#lastdatepicker").val() === "" || $("#lastdatepicker").val() === " ") {
+        isValid = false;
+        $("#lastdatepicker").addClass('error');
+    }
+    else {
+        $("#lastdatepicker").removeClass('error');
+    }
+    if (document.getElementById('Radios2').checked) {
+        if (document.getElementById('cbMonday').checked == false & document.getElementById('cbTuesday').checked == false & document.getElementById('cbWednesday').checked == false & document.getElementById('cbThursday').checked == false & document.getElementById('cbFriday').checked == false & document.getElementById('cbSaturday').checked == false & document.getElementById('cbSunday').checked == false) {
+            $("#multidayweekPanel").addClass('error');
+            isValid = false;
+        }
+        else {
+            $("#multidayweekPanel").removeClass('error');
+        }
+        if (document.getElementById('cbMonday').checked == true & ($("#montimepicker").val() === undefined || $("#montimepicker").val() === "")) {
+            $("#montimepicker").addClass('error');
+        }
+        else {
+            $("#montimepicker").removeClass('error');
+        }
+        if (document.getElementById('cbTuesday').checked == true & ($("#tuetimepicker").val() === undefined || $("#tuetimepicker").val() === "")) {
+            $("#tuetimepicker").addClass('error');
+        }
+        else {
+            $("#tuetimepicker").removeClass('error');
+        }
+        if (document.getElementById('cbWednesday').checked == true & ($("#wentimepicker").val() === undefined || $("#wentimepicker").val() === "")) {
+            $("#wentimepicker").addClass('error');
+        }
+        else {
+            $("#wentimepicker").removeClass('error');
+        }
+        if (document.getElementById('cbThursday').checked == true & ($("#thutimepicker").val() === undefined || $("#thutimepicker").val() === "")) {
+            $("#thutimepicker").addClass('error');
+        }
+        else {
+            $("#thutimepicker").removeClass('error');
+        }
+        if (document.getElementById('cbFriday').checked == true & ($("#fritimepicker").val() === undefined || $("#fritimepicker").val() === "")) {
+            $("#fritimepicker").addClass('error');
+        }
+        else {
+            $("#fritimepicker").removeClass('error');
+        }
+        if (document.getElementById('cbSaturday').checked == true & ($("#sattimepicker").val() === undefined || $("#sattimepicker").val() === "")) {
+            $("#sattimepicker").addClass('error');
+        }
+        else {
+            $("#sattimepicker").removeClass('error');
+        }
+        if (document.getElementById('cbSunday').checked == true & ($("#suntimepicker").val() === undefined || $("#suntimepicker").val() === "")) {
+            $("#suntimepicker").addClass('error');
+        }
+        else {
+            $("#suntimepicker").removeClass('error');
+        }
 
+    }
+    if (document.getElementById('Radios1').checked) {
+        if ($("#weeklytimepicer").val() === undefined || $("#weeklytimepicer").val() === "") {
+            $("#weeklytimepicer").addClass('error');
+        }
+        else {
+            $("#weeklytimepicer").removeClass('error');
+        }
+    }
+    if (document.getElementById('Radios3').checked) {
+        if ($("#secondweeklytimepicer").val() === undefined || $("#secondweeklytimepicer").val() === "") {
+            $("#secondweeklytimepicer").addClass('error');
+        }
+        else {
+            $("#secondweeklytimepicer").removeClass('error');
+        }
+    }
+    if (document.getElementById('Radios4').checked) {
+        if ($("#mounthtimepicer").val() === undefined || $("#mounthtimepicer").val() === "") {
+            $("#mounthtimepicer").addClass('error');
+        }
+        else {
+            $("#mounthtimepicer").removeClass('error');
+        }
+    }
+    return isValid;
+}
 function checkValidation() {
     var isValid = true;
     if ($("#title").val() === undefined || $("#title").val() === "" || $("#title").val() === " ") {
@@ -585,4 +830,15 @@ function MultibleDayCB() {
     }
 
    
+}
+
+
+
+
+function mouseOver(divin) {
+    document.getElementById('' + divin + '').style.backgroundColor = 'blueviolet';
+}
+
+function mouseOut(divin) {
+    document.getElementById(''+divin+'').style.backgroundColor = 'transparent';
 }

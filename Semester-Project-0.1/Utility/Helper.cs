@@ -31,6 +31,11 @@ namespace Semester_Project_0._1.Utility
         public static string classAddError = "Something went wront, Please try again.";
         public static string classUpdatError = "Something went wront, Please try again.";
         public static string somethingWentWrong = "Something went wront, Please try again.";
+
+        
+        public static string studentEnroled = "Student enrolled in Class.";
+        public static string studentUnEnroled = "Student Unenrolled in Class.";
+
         public static int success_code = 1;
         public static int failure_code = 0;
 

@@ -15,9 +15,9 @@ namespace Semester_Project_0._1.Controllers
     public class AccountController : Controller
     {
         private readonly ApplicationDBContext _db;
-        UserManager<ApplicationUser> _userManager;
-        SignInManager<ApplicationUser> _signInManager;
-        RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         public AccountController(ApplicationDBContext db, UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager) 
         {
@@ -107,5 +107,13 @@ namespace Semester_Project_0._1.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
         }
+
+
+
+        public IActionResult YourAccount()
+        {
+            return View();
+        }
+
     }
 }

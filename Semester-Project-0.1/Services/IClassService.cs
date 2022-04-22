@@ -1,4 +1,5 @@
-﻿using Semester_Project_0._1.Models.ViewModels;
+﻿using Semester_Project_0._1.Models;
+using Semester_Project_0._1.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace Semester_Project_0._1.Services
 {
     public interface IClassService
     {
-        public List<InstructureVM> GetInstructureList();
+        public List<InstructorVM> GetInstructureList();
         public List<UserVM> GetUserList();
 
         public List<StudentVM> GetStudentList();
@@ -19,5 +20,7 @@ namespace Semester_Project_0._1.Services
         public ClassVM GetById(int id);
         public Task<int> Delete(int id);
         public Task<int> ConfirmEvent(int id);
+        public List<ClassVM> UserStudentClasslist(string id);
+        public List<RecurringClassInstent> GetStudentsRecurringClassList(int id);
     }
 }

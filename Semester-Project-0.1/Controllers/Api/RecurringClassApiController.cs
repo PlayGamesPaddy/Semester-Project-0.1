@@ -224,7 +224,7 @@ namespace Semester_Project_0._1.Controllers.Api
                 commonResponse.status = _RecurringClassService.EnroleStudent(classStudentList).Result;
                 if (commonResponse.status == 1)
                 {
-                    commonResponse.message = Helper.classUpdated;
+                    commonResponse.message = Helper.studentEnroled;
                 }
                 if (commonResponse.status == 2)
                 {
@@ -238,6 +238,50 @@ namespace Semester_Project_0._1.Controllers.Api
             }
             return Ok(commonResponse);
         }
+
+        [HttpPost]
+        [Route("unEnrollStudent")]
+        public IActionResult unEnrollStudent(ClassStudentList data)
+        {
+            //RecurringClassInstent rci = _db.RecurringClasses.Find(model.recurringClassInstentId);
+            ClassStudentList classStudentList = new ClassStudentList();
+
+            classStudentList.id = data.id;
+            classStudentList.studentId = data.studentId;
+            classStudentList.recurringClassInstentId = data.recurringClassInstentId;
+            ClassStudentList classStudentListCheack = _db.ClassStudentList.FirstOrDefault(cs => cs.studentId == classStudentList.studentId && cs.recurringClassInstentId == classStudentList.recurringClassInstentId);
+
+
+
+            CommonResponse<int> commonResponse = new CommonResponse<int>();
+            try
+            {
+                if (classStudentListCheack == null)
+                {
+                    commonResponse.status = 3;
+                    commonResponse.message = "this Student is already Enrollrd in this class.";
+                    return Ok(commonResponse);
+                }
+                commonResponse.status = _RecurringClassService.UnEnroleStudent(classStudentListCheack).Result;
+                if (commonResponse.status == 1)
+                {
+                    commonResponse.message = Helper.studentUnEnroled;
+                }
+                if (commonResponse.status == 2)
+                {
+                    commonResponse.message = Helper.classAdded;
+                }
+            }
+            catch (Exception e)
+            {
+                commonResponse.message = e.Message;
+                commonResponse.status = Helper.failure_code;
+            }
+            return Ok(commonResponse);
+        }
+
+
+
         [HttpPost]
         [Route("addComment")]
         public IActionResult addComment(ClassStudentComment data)
@@ -270,6 +314,46 @@ namespace Semester_Project_0._1.Controllers.Api
             }
             return Ok(commonResponse);
         }
+
+        [HttpGet]
+        [Route("GetStudentClasses")]
+        public IActionResult GetStudentClasses()
+        {
+            CommonResponse<List<ClassVM>> commonResponse = new CommonResponse<List<ClassVM>>();
+            try
+            {
+                //commonResponse.datenum = _classService.StudentEventsById(instructureId);
+                commonResponse.datenum = _classService.UserStudentClasslist(loginUserId);
+                commonResponse.status = Helper.success_code;
+            }
+            catch (Exception e)
+            {
+                commonResponse.message = e.Message;
+                commonResponse.status = Helper.failure_code;
+            }
+            return Ok(commonResponse);
+        }
+
+        [HttpGet]
+        [Route("GetInstructureClasses")]
+        public IActionResult GetInstructureClasses()
+        {
+            CommonResponse<List<ClassVM>> commonResponse = new CommonResponse<List<ClassVM>>();
+            try
+            {
+                //commonResponse.datenum = _classService.StudentEventsById(instructureId);
+                commonResponse.datenum = _classService.InstructureEventsById(loginUserId);
+                commonResponse.status = Helper.success_code;
+            }
+            catch (Exception e)
+            {
+                commonResponse.message = e.Message;
+                commonResponse.status = Helper.failure_code;
+            }
+            return Ok(commonResponse);
+        }
+
+
     }
 
 }

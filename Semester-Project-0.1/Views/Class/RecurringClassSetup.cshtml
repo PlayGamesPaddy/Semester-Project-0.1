@@ -1,29 +1,34 @@
 ﻿@using Microsoft.AspNetCore.Http
+@model Semester_Project_0._1.Models.ViewModels.RecurringClassContainer;
 @inject IHttpContextAccessor HttpContextAccessor
 @inject Microsoft.AspNetCore.Identity.SignInManager<Semester_Project_0._1.Models.ApplicationUser> signInManager
 
 <h4>Recurring - Class</h4>
 
-<div class="container p-3 badge-dark">
+<div class="container p-3 ">
     <form id="classForm" autocomplete="off" novalidate="novalidate" runat="server">
         <div class="model-header">
 
             <h4 class="modal-title">Add Details</h4>
 
         </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div class="modal-body">
             <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" maxlength="100" class="form-control" id="title" />
+                <label asp-for="Title">Title</label>
+                <input type="text" maxlength="100" class="form-control" asp-for="Title" />
+                <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div div class="form-group">
-                <label for="numberOfStudents">Number Of Students</label>
-                <input type="number" id="numberOfStudents" class="form-control" />
+                <label asp-for="MaxNumberOfStudents">Number Of Students</label>
+                <input type="number" asp-for="MaxNumberOfStudents" class="form-control" />
+                <span asp-validation-for="MaxNumberOfStudents" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label for="description">Descriptions</label>
-                <textarea type="text" class="form-control" id="description"></textarea>
+                <label asp-for="Description">Descriptions</label>
+                <textarea type="text" class="form-control" asp-for="Description"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
 
             <div class="form-group">
@@ -39,8 +44,9 @@
 
             </div>
             <div class="form-group">
-                <label for="title">Duration</label>
-                <select id="duration" asp-items="ViewBag.Duration" class="form-control"></select>
+                <label asp-for="Duration">Duration</label>
+                <select asp-for="Duration" asp-items="@ViewBag.Duration" class="form-control"></select>
+                <span asp-validation-for="Duration" class="text-danger"></span>
             </div>
 
             <!--<button type="button" class="btn btn-secondary" onclick="inCloseModal();">Close</button>&nbsp;-->
@@ -219,3 +225,4 @@
         </div>
     </form>
 </div>
+
