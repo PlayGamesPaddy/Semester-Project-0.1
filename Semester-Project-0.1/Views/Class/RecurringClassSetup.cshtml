@@ -22,7 +22,7 @@
             <div div class="form-group">
                 <label asp-for="MaxNumberOfStudents">Number Of Students</label>
                 <input type="number" asp-for="MaxNumberOfStudents" class="form-control" />
-                <span asp-validation-for="MaxNumberOfStudents" class="text-danger"></span>
+                <span asp-validation-for="MaxNumberOfStudents" class="text-danger" onpaste ="return false;"></span>
             </div>
 
             <div class="form-group">
@@ -33,12 +33,12 @@
 
             <div class="form-group">
                 <lable for="DateOfFirstClass">Date of First Class</lable>
-                <input id="datepicker" class="form-control">
+                <input id="datepicker" class="form-control" onkeydown="return false;" onpaste ="return false;">
             </div>
 
             <div class="form-group">
                 <lable for="DateOfLastClass">Date of Last Class</lable>
-                <input id="lastdatepicker" class="form-control">
+                <input id="lastdatepicker" class="form-control" onkeydown="return false;" onpaste ="return false;">
             </div>
             <div class="btn-danger d-flex ">
 
@@ -97,81 +97,81 @@
                         <div class="col-12 col-md-12">
 
                             <div class="row">
-                                <div class="col-3 col-sm-6">
+                                <div class="col-6 col-sm-6">
                                     <label class="checkbox">
                                         <input type="checkbox" name="recurrence" id="cbMonday" value="Monday" onclick="MultibleDayCB()">
                                         Monday
                                     </label>
                                 </div>
-                                <div class="col-3 col-sm-6" id="mondiv">
+                                <div class="col-6 col-sm-6" id="mondiv">
                                     <input id="montimepicker" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-3 col-sm-6">
+                                <div class="col-6 col-sm-6">
                                     <label class="checkbox">
                                         <input type="checkbox" name="recurrence" id="cbTuesday" value="Tuesday" onclick="MultibleDayCB()">
                                         Tuesday
                                     </label>
                                 </div>
 
-                                <div class=" col-3 col-sm-6" id="tuediv">
+                                <div class=" col-6 col-sm-6" id="tuediv">
                                     <input id="tuetimepicker" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-3 col-sm-6">
+                                <div class="col-6 col-sm-6">
                                     <label class="checkbox">
                                         <input type="checkbox" name="recurrence" id="cbWednesday" value="Wednesday" onclick="MultibleDayCB()">
                                         Wednesday
                                     </label>
                                 </div>
-                                <div class=" col-3 col-sm-6 " id="wendiv">
+                                <div class=" col-6 col-sm-6 " id="wendiv">
                                     <input id="wentimepicker" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class=" col-3 col-sm-6">
+                                <div class=" col-6 col-sm-6">
                                     <label class="checkbox">
                                         <input type="checkbox" name="recurrence" id="cbThursday" value="Thursday" onclick="MultibleDayCB()">
                                         Thursday
                                     </label>
                                 </div>
-                                <div class=" col-3 col-sm-6" id="thudiv">
+                                <div class=" col-6 col-sm-6" id="thudiv">
                                     <input id="thutimepicker" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-3 col-sm-6">
+                                <div class="col-6 col-sm-6">
                                     <label class="checkbox">
                                         <input type="checkbox" name="recurrence" id="cbFriday" value="Friday" onclick="MultibleDayCB()">
                                         Friday
                                     </label>
                                 </div>
-                                <div class="col-3 col-sm-6 " id="fridiv">
+                                <div class="col-6 col-sm-6 " id="fridiv">
                                     <input id="fritimepicker" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-3 col-sm-6">
+                                <div class="col-6 col-sm-6">
                                     <label class="checkbox">
                                         <input type="checkbox" name="recurrence" id="cbSaturday" value="Saturday" onclick="MultibleDayCB()">
                                         Saturday
                                     </label>
                                 </div>
-                                <div class="col-3 col-sm-6 " id="satdiv">
+                                <div class="col-6 col-sm-6 " id="satdiv">
                                     <input id="sattimepicker" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class=" col-3 col-sm-6">
+                                <div class=" col-6 col-sm-6">
                                     <label class="checkbox">
                                         <input type="checkbox" name="recurrence" id="cbSunday" value="Sunday" onclick="MultibleDayCB()">
                                         Sunday
                                     </label>
                                 </div>
 
-                                <div class=" col-3 col-sm-6 " id="sundiv">
+                                <div class=" col-6 col-sm-6 " id="sundiv">
                                     <input id="suntimepicker" class="form-control">
                                 </div>
                             </div>

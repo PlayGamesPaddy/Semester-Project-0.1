@@ -325,7 +325,7 @@ function onShowModal(obj, isEventDetail) {
         $("#id").val(obj.id);
         $("#classDate").val(obj.startDate);
         $("#description").val(obj.description);
-        $("#duration").val(obj.duration);
+        $("#Duration").val(obj.duration);
         $("#instructureId").val(obj.instructerId);
         $("#studentId").val(obj.studentId);
         $("#lblInstructureName").html(obj.instructureName);
@@ -453,7 +453,7 @@ function rClassSubmit() {
             FirstClassDate: $("#datepicker").val(),
             LastClassDate: $("#lastdatepicker").val(),
             Description: $("#Description").val(),
-            Duration: $("#duration").val(),
+            Duration: $("#Duration").val(),
             InstructerId: $("#instructureId").val(),
             MaxNumberOfStudents: $("#MaxNumberOfStudents").val(),
             RecurringType: radioselected,
@@ -676,7 +676,7 @@ function OnInstructerIdChange() {
     calendar.refetchEvents();
 }
 
-function onDeleteClass() {
+function onDeleteClassPopup() {
     var id = parseInt($("#id").val());
     var pageNo = $("#pageNo").val();
     $.ajax({

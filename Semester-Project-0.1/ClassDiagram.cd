@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access">
+  <Comment CommentText="Model">
+    <Position X="1.75" Y="10.75" Height="0.75" Width="1.7" />
+  </Comment>
+  <Class Name="Semester_Project_0._1.Controllers.Api.ClassApiController" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAhAABgAAAAAAAAAAAAABAAAAEAAAIAAAAAEAAAAAA=</HashCode>
+      <FileName>Controllers\Api\ClassApiController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Controllers.Api.RecurringClassApiController" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAiAEAlCAAAAAAAABEAAAECAAAAAAAAEEAAAAA=</HashCode>
+      <FileName>Controllers\Api\RecurringClassApiController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Controllers.AccountController" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIhAAAAAAAAAAAAABAAAAgAAABAAAAAAAQAAQAAAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Controllers.ClassController" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIgAAAAAABAAEAAAAAgAAAAAEAAAQAAAEEEAAAAAA=</HashCode>
+      <FileName>Controllers\ClassController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Controllers.HomeController" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAQAAAAAAAAAAIAAAAQAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Controllers.InstructorController" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAgAAAAAAAAAAEAAAAAAAEAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Controllers\InstructorController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Controllers.ItemController" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAEAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\ItemController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Controllers.StudentController" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAgAAAAAAAAAAAAAAAAAAEAAEAAAAEAEgAAAAA=</HashCode>
+      <FileName>Controllers\StudentController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Controllers.StudentTypeController" Collapsed="true">
+    <Position X="2.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAAAAAAAAAAAAAAAAAAAEAAEAAAAEAAgAAAAA=</HashCode>
+      <FileName>Controllers\StudentTypeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Services.ClassService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAhDgAAAAAAAAAIAAAAAAAAAAAmAAAggAAAAAAACAIA=</HashCode>
+      <FileName>Services\ClassService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Semester_Project_0._1.Services.RecurringClassService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAIAAAAAAAAAAAAAAEAAAGAAAAEAAAEBEACAAA=</HashCode>
+      <FileName>Services\RecurringClassService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.335" Collapsed="true" />
+  </Class>
+  <Class Name="Semester_Project_0._1.Services.UserService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAhAAgAAAAAAAAAQAAABAAAAAAQAAAEAAAEAAAAAA=</HashCode>
+      <FileName>Services\UserService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.169" Collapsed="true" />
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.ViewModels.ClassVM" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACRAAAEIAiAEAIAAAAAAAgQCAAAAACAAAAAEACAAA=</HashCode>
+      <FileName>Models\ViewModels\ClassVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.ViewModels.CommonResponse&lt;T&gt;" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Models\ViewModels\CommonResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.ViewModels.InstructorVM" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAIAAAAAAAAAJAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Models\ViewModels\InstructorVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.ViewModels.LoginViewModel" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAgAAA=</HashCode>
+      <FileName>Models\ViewModels\LoginViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.ViewModels.RecurringClassContainer" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAQGCAAAAAiAEBAAUAAgwUACCAAABAEAAEYAAAEAEA=</HashCode>
+      <FileName>Models\ViewModels\RecurringClassContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.ViewModels.RecurringClassInstentVM" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAACAAAAgAAigEAAQAAAAAAACCAAAAAAAAQIAAAEAAA=</HashCode>
+      <FileName>Models\ViewModels\RecurringClassInstentVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.ViewModels.RegisterViewModel" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEIAACAAAAAAAAAAAAgAAAAAAAACAAAAAAAAIAg=</HashCode>
+      <FileName>Models\ViewModels\RegisterViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.ViewModels.StudentClassVM" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAEAAAAAAAAEAAQAQAACAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Models\ViewModels\StudentClassVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.ViewModels.StudentVM" Collapsed="true">
+    <Position X="4" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAEAAAQgAAAAAAAAAAQAgAAABAAIAAAAAAAAACAAA=</HashCode>
+      <FileName>Models\ViewModels\StudentVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.ViewModels.UserVM" Collapsed="true">
+    <Position X="7.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Models\ViewModels\UserVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.ApplicationUser" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Models\ApplicationUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.ClassInstent" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAEABiAEAIAAAAAAAgACAAAAACAAAAAEACAAA=</HashCode>
+      <FileName>Models\ClassInstent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.ClassRoster" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAQAAQACAAAAAAAAAEAAAAgAAAAAA=</HashCode>
+      <FileName>Models\ClassRoster.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.ClassStudentComment" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAACAAAAAAAAAAAAAAAAAAAAAIABAAAAAAACCAAAABA=</HashCode>
+      <FileName>Models\ClassStudentComment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.ClassStudentList" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAEAAQAQAACAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Models\ClassStudentList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.ErrorViewModel" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ErrorViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.Item" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAgAAAAAAAAAAAAAAEQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.RecurringClassInstent" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAACAAAAgAAigEAAAAAAAAAACCAAAAAAAAQIAAAEAAA=</HashCode>
+      <FileName>Models\RecurringClassInstent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.Student" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAABAAICAAAAAAACCIAA=</HashCode>
+      <FileName>Models\Student.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Models.StudentType" Collapsed="true">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\StudentType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Data.ApplicationDBContext" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAEACAAAAACAAAAAAAAAAAAAAAAgAACAABA=</HashCode>
+      <FileName>Data\ApplicationDBContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Semester_Project_0._1.Utility.EmailSender" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Utility\EmailSender.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Semester_Project_0._1.Utility.Helper" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CKADAAADAAAAAhAEAAsAAQAADgCgAAAAAAAAAgAAgAA=</HashCode>
+      <FileName>Utility\Helper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Semester_Project_0._1.Services.IClassService" Collapsed="true">
+    <Position X="0.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAhDgAAAAAAAAAIAAAAAAAAAAAkAAAggAAAAAAACAIA=</HashCode>
+      <FileName>Services\IClassService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Semester_Project_0._1.Services.InterfaceRecurringClassService" Collapsed="true">
+    <Position X="2.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAEAAAAAAAAEAAAAAEACAAA=</HashCode>
+      <FileName>Services\InterfaceRecurringClassService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Semester_Project_0._1.Services.InterfaceUserService" Collapsed="true">
+    <Position X="4.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAQAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Services\InterfaceUserService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Semester_Project_0._1.Data;
@@ -47,7 +48,8 @@ namespace Semester_Project_0._1.Controllers
                     //var userName = HttpContext.Session.GetString("ssuserName");
 
 
-                    return RedirectToAction("Index", "Class");
+                    //return RedirectToAction("Index", "Class");
+                    return RedirectToAction("YourAccount", "account");
                 }
                 ModelState.AddModelError("", "Invalid login attempt");
             }
@@ -88,6 +90,7 @@ namespace Semester_Project_0._1.Controllers
                     }
                     else
                     {
+                        //need to take this out I think somting on the class index page is using it so I mayneed to rework.
                         TempData["newAdminSignUp"] = user.FullName;
                         TempData["instructerIdTemp"] = user.Id.ToString();
                     }
@@ -115,5 +118,22 @@ namespace Semester_Project_0._1.Controllers
             return View();
         }
 
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult ResetPassword()
+        {
+            //Working hear
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> ResetPassword(ResetPasswordVM model)
+        {
+            
+            //Working hear
+            return View();
+        }
     }
 }
