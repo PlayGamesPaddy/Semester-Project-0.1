@@ -54,6 +54,7 @@ namespace Semester_Project_0._1.Controllers
             ViewBag.Duration = Helper.GetTimeDropDown();
             ViewBag.Days = Helper.DaysOfTheWeek();
             ViewBag.WeekOfTheMonth = Helper.WeekOfTheMonth();
+            
             return View();
         }
         //list
@@ -148,6 +149,34 @@ namespace Semester_Project_0._1.Controllers
                 //new StudentClassVM();
             return View(classStudentNotes);
         }
-        
+
+
+        public IActionResult Update(int? id)
+        {
+            ViewBag.studentList = _userService.GetUsersStudents();
+            ViewBag.InstuctureList = _classService.GetInstructureList();
+            ViewBag.Duration = Helper.GetTimeDropDown();
+            RecurringClassInstentVM recurringClassInstentVM = new RecurringClassInstentVM();
+            recurringClassInstentVM.recurringClassInstent = _db.RecurringClasses.Find(id);
+            recurringClassInstentVM.Instructer = _db.Users.Find(recurringClassInstentVM.recurringClassInstent.InstructerId);
+            //st<ClassInstent> classes = new List<ClassInstent>();
+            //List<ClassStudentList>
+            List<ClassStudentList> iecl = _db.ClassStudentList.Where(x => x.recurringClassInstentId == id).ToList();
+            foreach (ClassStudentList CS in iecl)
+            {
+                CS.student = _db.Students.Find(CS.studentId);
+            }
+            recurringClassInstentVM.StudentList = iecl;
+            recurringClassInstentVM.Classlist = _db.Classes.Where(x => x.RecurringClassInstentId == id).ToList();
+            //IEnumerable<ClassInstent> classes = _db.Classes.Where(x => x.RecurringClassInstentId == id);
+            return View(recurringClassInstentVM);
+        }
+
+        public IActionResult UpdateRCInfo(int? id)
+        {
+            RecurringClassInstentVM recurringClassInstentVM = new RecurringClassInstentVM();
+            recurringClassInstentVM.recurringClassInstent = _db.RecurringClasses.Find(id);
+            return View(recurringClassInstentVM);
+        }
     }
 }

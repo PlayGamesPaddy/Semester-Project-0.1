@@ -212,7 +212,7 @@
                 }
                 else
                 {
-                    <input type="hidden" id="instructureId" value="" />
+                    <input type="hidden" id="instructureId" value="@HttpContextAccessor.HttpContext.Session.GetString("ssuserID")" />
                     <input type="hidden" id="instructureselect" value="2" />
                 }
             </div>

@@ -47,6 +47,7 @@ namespace Semester_Project_0._1.Utility
                 return new List<SelectListItem>
                 {
                     new SelectListItem { Value = Helper.SystemAdmin.ToString(), Text = "SystemAdmin" },
+                    new SelectListItem{Value=Helper.Instructure.ToString(),Text="Instructure"},
                     new SelectListItem { Value = Helper.Admin.ToString(), Text = "Admin" },
                 };
             }
@@ -55,7 +56,6 @@ namespace Semester_Project_0._1.Utility
 
                 return new List<SelectListItem>
                 {
-                    new SelectListItem{Value=Helper.Instructure.ToString(),Text="Instructure"},
                     new SelectListItem{Value=Helper.User.ToString(),Text="User"}
                 };
             }

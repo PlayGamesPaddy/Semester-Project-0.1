@@ -200,9 +200,17 @@ namespace Semester_Project_0._1.Services
 
         public async Task<int> Delete(int id)
         {
-            var classInstence = _db.Classes.FirstOrDefault(x => x.Id == id);
+            ClassInstent classInstence = _db.Classes.FirstOrDefault(x => x.Id == id);
+            //(List<RecurringClassInstent>)_db.RecurringClasses.Where(rc=>rc.Id==classStudentList.recurringClassInstentId).ToList();//classInstence.RecurringClassInstent = _db.RecurringClasses.Find(classInstence.RecurringClassInstentId);
             if (classInstence != null)
             {
+                List<ClassStudentList> iecl = _db.ClassStudentList.Where(x => x.recurringClassInstentId == classInstence.RecurringClassInstentId).ToList();
+                foreach (ClassStudentList cSL in iecl)
+                {
+                    cSL.student = _db.Students.Find(cSL.studentId);
+                    await _emailSender.SendEmailAsync(cSL.student.StudentEmail, "Class Canceled",
+                        $"{classInstence.Title} on {classInstence.StartDate} Has been Canceled.");
+                }
                 _db.Classes.Remove(classInstence);
                 return await _db.SaveChangesAsync();
             }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Semester_Project_0._1.Data;
 using Semester_Project_0._1.Models;
@@ -19,13 +20,18 @@ namespace Semester_Project_0._1.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+
+        private readonly IEmailSender _emailSender;
+
         public AccountController(ApplicationDBContext db, UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager) 
+            RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender) 
         {
             _db = db;
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+
+            _emailSender = emailSender;
         }
         public IActionResult Login()
         {
@@ -94,7 +100,18 @@ namespace Semester_Project_0._1.Controllers
                         TempData["newAdminSignUp"] = user.FullName;
                         TempData["instructerIdTemp"] = user.Id.ToString();
                     }
-                    return RedirectToAction("index", "Class");
+                    ///////////////////////////////////////////
+                    await _emailSender.SendEmailAsync(user.Email, "Account Made For project.class.schedule",
+                        $"Your new acount on project.class.schedule have been created.");
+
+
+
+
+
+
+                    //////////////////////////////////////////////
+                    return RedirectToAction("YourAccount", "Account");
+                    //return YourAccount();
                 }
                 foreach (var error in result.Errors)
                 {

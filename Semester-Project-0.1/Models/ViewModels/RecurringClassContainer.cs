@@ -26,7 +26,7 @@ namespace Semester_Project_0._1.Models.ViewModels
         [Required]
         public string RecurringType { get; set; }
 
-
+        public int Id { get; set; }
 
 
         public string weeklyday { get; set; }

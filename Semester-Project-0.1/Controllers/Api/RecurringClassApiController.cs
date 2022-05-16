@@ -353,6 +353,48 @@ namespace Semester_Project_0._1.Controllers.Api
             return Ok(commonResponse);
         }
 
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///
+
+
+        [HttpPost]
+        [Route("UpdateCalendarData")]
+        public IActionResult UpdateCalendarData(RecurringClassContainer data)
+        {
+            //, List<String> requestDataDays//RecurringClassInstentVM 
+            RecurringClassInstentVM recurringClassInstentVM = new RecurringClassInstentVM();
+
+
+            recurringClassInstentVM.Id = data.Id;
+            recurringClassInstentVM.Title = data.Title;
+            recurringClassInstentVM.Description = data.Description;
+            recurringClassInstentVM.Duration = data.Duration;
+            recurringClassInstentVM.MaxNumberOfStudents = data.MaxNumberOfStudents;
+
+            CommonResponse<int> commonResponse = new CommonResponse<int>();
+            try
+            {
+                commonResponse.status = _RecurringClassService.RClassUpdate(recurringClassInstentVM).Result;
+                /*if (commonResponse.status == 1)
+                {
+                    commonResponse.message = Helper.classUpdated;
+                }
+                if (commonResponse.status == 2)
+                {
+                    commonResponse.message = Helper.classAdded;
+                }*/
+                commonResponse.message = Helper.classAdded;
+            }
+            catch (Exception e)
+            {
+                commonResponse.message = e.Message;
+                commonResponse.status = Helper.failure_code;
+            }
+            //commonResponse.datenum = <int>recurringClassInstentVM.Id;
+            //commonResponse.datenum.add(recurringClassInstentVM);
+            return Ok(commonResponse);
+        }
+
 
     }
 

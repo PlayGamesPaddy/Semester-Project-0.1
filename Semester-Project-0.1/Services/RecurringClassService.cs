@@ -29,14 +29,7 @@ namespace Semester_Project_0._1.Services
         {
             var firstDate = DateTime.Parse(model.FirstClassDate);
             var lastDate = DateTime.Parse(model.LastClassDate);
-            if (true)
-            {
-
-            }
-            else
-            {
-
-            }
+            
             var Instructer = _db.Users.FirstOrDefault(u => u.Id == model.InstructerId);
             RecurringClassInstent recurringClass = new RecurringClassInstent()
             {
@@ -181,7 +174,43 @@ namespace Semester_Project_0._1.Services
         {
             return _db.ClassStudentList.Where(RC => RC.recurringClassInstentId == RCid).Count();
         }
-    }
 
+        public async Task<int> RClassUpdate(RecurringClassInstentVM RCI)
+        {
+
+            var RCU = _db.RecurringClasses.FirstOrDefault(x => x.Id == RCI.Id);
+            RCU.Title = RCI.Title;
+            RCU.Instructer = RCI.Instructer;
+            RCU.Description = RCI.Description;
+            RCU.MaxNumberOfStudents = RCI.MaxNumberOfStudents;
+            await _db.SaveChangesAsync();
+            return RCI.Id.Value;
+        }
+    }
+    /*
+     var firstDate = DateTime.Parse(model.FirstClassDate);
+            var lastDate = DateTime.Parse(model.LastClassDate);
+            
+            var Instructer = _db.Users.FirstOrDefault(u => u.Id == model.InstructerId);
+            RecurringClassInstent recurringClass = new RecurringClassInstent()
+            {
+                Title = model.Title,
+                FirstClassDate = firstDate,
+                LastClassDate = lastDate,
+                Description = model.Description,
+                Duration = model.Duration,
+                InstructerId = model.InstructerId,
+                Instructer = model.Instructer,
+                RecurringType = model.RecurringType,
+                Classlist = model.Classlist,
+                MaxNumberOfStudents=model.MaxNumberOfStudents
+            };
+            //List<ClassInstent>  classlist;
+            
+            _db.RecurringClasses.Add(recurringClass);
+            await _db.SaveChangesAsync();
+            int newId = recurringClass.Id;
+            return newId;
+     */
 
 }

@@ -14,5 +14,7 @@ namespace Semester_Project_0._1.Services
         public Task<int> AddComment(ClassStudentComment model);
         public Task<int> UnEnroleStudent(ClassStudentList Id);
         public int GetStudentCount(int RCid);
+
+        public Task<int> RClassUpdate(RecurringClassInstentVM RCI);
     }
 }

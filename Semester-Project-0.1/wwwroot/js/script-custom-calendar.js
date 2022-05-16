@@ -340,12 +340,12 @@ function onShowModal(obj, isEventDetail) {
             $("#btnSubmit").removeClass("d-none");
             $("#btnConfirm").removeClass("d-none");
         }
-        $("#btnDelete").removeClass("d-none");
+        $("#PUbtnDelete").removeClass("d-none");
     }
     else {
         $("#classDate").val(obj.startStr + " " + new moment().format("hh:mm A"));
         $("#id").val(0);
-        $("#btnDelete").addClass("d-none");
+        $("#PUbtnDelete").addClass("d-none");
         $("#btnSubmit").removeClass("d-none");
     }
     $("#classInput").modal("show");
@@ -410,6 +410,49 @@ function onSubmitForm() {
         });
     }
 }
+/*
+Id: parseInt($('#id').val()),
+            Title: $("#Title").val(),
+            FirstClassDate: $("#datepicker").val(),
+            LastClassDate: $("#lastdatepicker").val(),
+            Description: $("#Description").val(),
+            Duration: $("#Duration").val(),
+            InstructerId: $("#instructureId").val(),
+            MaxNumberOfStudents: $("#MaxNumberOfStudents").val(),
+            RecurringType: radioselected, */
+function updateRC() {
+    var getRequestData = {
+        Id: $('#RCId').val(),
+        Title: $("#Title").val(),
+        Description: $("#Description").val(),
+        InstructerId: $("#instructureId").val(),
+        MaxNumberOfStudents: $("#MaxNumberOfStudents").val(),
+        FirstClassDate: $('#FirstClassDate').val(),
+        LastClassDate: $('#LastClassDate').val(),
+        RecurringType: $('#RecurringType').val(),
+    };
+
+    $.ajax({
+        url: routeURL + '/api/RecurringClassSetup/UpdateCalendarData',
+        type: 'POST',
+        data: JSON.stringify(getRequestData),
+        contentType: 'application/json',
+        success: function (response) {
+            if (response.status >= 0) {
+                $.notify(response.message, "success");
+                window.location.href = '/Class/RecurringClassInfo/' + response.status;
+            }
+            else {
+                $.notify("1" + response.message, "error");
+            }
+        },
+        error: function (xhr) {
+            $.notify("Error", "error");
+        }
+    });
+
+
+}
 function rClassSubmit() {
     var radioselected;
     var monday = false;
@@ -448,7 +491,6 @@ function rClassSubmit() {
 
 
         var requestData = {
-            Id: parseInt($('#id').val()),
             Title: $("#Title").val(),
             FirstClassDate: $("#datepicker").val(),
             LastClassDate: $("#lastdatepicker").val(),

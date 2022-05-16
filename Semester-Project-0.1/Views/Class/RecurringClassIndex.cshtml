@@ -54,7 +54,7 @@
                 <td>
                     @if (User.IsInRole(Semester_Project_0._1.Utility.Helper.Admin) || User.IsInRole(Semester_Project_0._1.Utility.Helper.SystemAdmin) || User.IsInRole(Semester_Project_0._1.Utility.Helper.Instructure))
                     {
-                        <a asp-controller="" asp-action="Update" asp-route-id="@Rclass.Id" class="btn btn-primary mx-1">Update</a>
+                        <a asp-controller="Class" asp-action="Update" asp-route-id="@Rclass.Id" class="btn btn-primary mx-1">Update</a>
                         <a asp-controller="Class" asp-action="RecurringClassDelete" asp-route-id="@Rclass.Id" class="btn btn-danger mx-1" onclick="RClassDelete()">Delete</a>
 
                     }
